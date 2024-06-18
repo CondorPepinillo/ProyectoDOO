@@ -24,13 +24,20 @@ public class pasajesHorariosUI {
         this.destino = destino;
         this.fecha = fecha;
 
+        /**
+         * @param SalidaAux nos va ayudar a poner una hora a "fecha" para que esta sea la hora de salida programada
+         */
         Calendar salidaAux = Calendar.getInstance();
         salidaAux.setTime(fecha);
-
+        /**
+         * @param llegadaAux nos va ayudar a poner una hora a "fecha" para que esta sea la hora de llegada programada
+         */
         Calendar llegadaAux = Calendar.getInstance();
         llegadaAux.setTime(fecha);
 
-
+        /**
+         * Se crean las distintas instancias
+         */
         for(int i = 0; i < 8; i++){
             salidaAux.set(Calendar.HOUR_OF_DAY, 8 + 2*i);
             salidaAux.set(Calendar.MINUTE, 0);
