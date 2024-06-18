@@ -70,7 +70,26 @@ public class pasajesHorariosUI {
     // Falta modificar para que lea un achivo distinto dependiendo del destino elegido, necesito ayuda con eso
     Object[][] getData(){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionLosAngeles.csv"));
+            BufferedReader br;
+            if (origen == Comunas.CONCEPCION && destino == Comunas.LOS_ANGELES){
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionLosAngeles.csv"));
+            }
+            else if(origen == Comunas.CONCEPCION && destino == Comunas.NACIMIENTO){
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionNacimiento.csv"));
+            }
+            else if(origen == Comunas.LOS_ANGELES && destino == Comunas.CONCEPCION){
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesConcepcion.csv"));
+            }
+            else if(origen == Comunas.LOS_ANGELES && destino == Comunas.NACIMIENTO){
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesNacimiento.csv"));
+            }
+            else if(origen == Comunas.NACIMIENTO && destino == Comunas.CONCEPCION){
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoConcepcion.csv"));
+            }
+            else{
+                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoLosAngeles.csv"));
+            }
+
             ArrayList<String> list = new ArrayList<>();
             String str = "";
             while ((str = br.readLine()) != null){
@@ -87,5 +106,12 @@ public class pasajesHorariosUI {
             e.printStackTrace();
             return null;
         }
+    }
+
+    Comunas getOrigen(){
+        return origen;
+    }
+    Comunas getDestino(){
+        return destino;
     }
 }
