@@ -1,24 +1,37 @@
 package com.proyecto;
 
 import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class pasajesHorariosUI {
     private JPanel panel1;
-    private JLabel vainas;
     private JPanel busesLabelsPanel;
+    private JTable ListaBuses;
+    private JScrollPane scrollPane;
 
     private Comunas origen;
     private Comunas destino;
     private Date fecha;
+    String[] col;
+    Object[][] data;
 
     public pasajesHorariosUI(Comunas origen, Comunas destino, Date fecha){
+
         JFrame frame = new JFrame("Panel Seleccion Bus");
-        frame.getContentPane().add(panel1);
+        col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio"};
+        data = getData();
+        ListaBuses = new JTable(data, col);
+        scrollPane = new JScrollPane(ListaBuses);
+        frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
 
         this.origen = origen;
         this.destino = destino;
@@ -52,6 +65,27 @@ public class pasajesHorariosUI {
             System.out.println(salida);
             System.out.println(llegada);
             Bus bus = new Bus(salida, llegada);
+        }
+    }
+    // Falta modificar para que lea un achivo distinto dependiendo del destino elegido, necesito ayuda con eso
+    Object[][] getData(){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionLosAngeles.csv"));
+            ArrayList<String> list = new ArrayList<>();
+            String str = "";
+            while ((str = br.readLine()) != null){
+                list.add(str);
+            }
+            int n = list.get(0).split(",").length;
+            Object[][] data = new Object[list.size()][n];
+            for (int i = 0; i < list.size(); i++){
+                data[i] = list.get(i).split(",");
+            }
+            br.close();
+            return data;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 }
