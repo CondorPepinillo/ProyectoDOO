@@ -5,8 +5,7 @@ import java.util.Date;
 
 public class pasajesHorariosUI {
     private JPanel panel1;
-    private JLabel origenLabel;
-    private JLabel destinoLabel;
+    private JLabel vainas;
 
     private Comunas origen;
     private Comunas destino;
@@ -22,11 +21,9 @@ public class pasajesHorariosUI {
         this.origen = origen;
         this.destino = destino;
         this.fecha = fecha;
-        System.out.println(origen.toString() + destino + fecha);
-        origenLabel.setText(origen.toString());
-        destinoLabel.setText(destino.toString());
 
     }
+
 
 
 }
