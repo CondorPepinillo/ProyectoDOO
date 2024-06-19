@@ -1,6 +1,7 @@
 package com.proyecto;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -13,29 +14,36 @@ public class pasajesHorariosUI {
     private JPanel busesLabelsPanel;
     private JTable ListaBuses;
     private JScrollPane scrollPane;
-
     private Comunas origen;
     private Comunas destino;
     private Date fecha;
     String[] col;
     Object[][] data;
 
-    public pasajesHorariosUI(Comunas origen, Comunas destino, Date fecha){
+    public pasajesHorariosUI(Comunas origin, Comunas destination, Date fecha){
+        this.origen = origin;
+        this.destino = destination;
+        this.fecha = fecha;
 
         JFrame frame = new JFrame("Panel Seleccion Bus");
         col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio"};
         data = getData();
-        ListaBuses = new JTable(data, col);
+
+        DefaultTableModel model = new DefaultTableModel(data, col) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        ListaBuses = new JTable(model);
+
         scrollPane = new JScrollPane(ListaBuses);
+        frame.setLocationRelativeTo(null);
         frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-
-
-        this.origen = origen;
-        this.destino = destino;
-        this.fecha = fecha;
 
         /**
          * @param SalidaAux nos va ayudar a poner una hora a "fecha" para que esta sea la hora de salida programada
@@ -70,24 +78,28 @@ public class pasajesHorariosUI {
     // Falta modificar para que lea un achivo distinto dependiendo del destino elegido, necesito ayuda con eso
     Object[][] getData(){
         try{
-            BufferedReader br;
-            if (origen == Comunas.CONCEPCION && destino == Comunas.LOS_ANGELES){
+            BufferedReader br = null;
+            if (origen.equals(Comunas.CONCEPCION) && destino.equals(Comunas.LOS_ANGELES)){
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionLosAngeles.csv"));
             }
-            else if(origen == Comunas.CONCEPCION && destino == Comunas.NACIMIENTO){
+            else if(origen.equals(Comunas.CONCEPCION) && destino.equals(Comunas.NACIMIENTO)){
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionNacimiento.csv"));
             }
-            else if(origen == Comunas.LOS_ANGELES && destino == Comunas.CONCEPCION){
+            else if(origen.equals(Comunas.LOS_ANGELES) && destino.equals(Comunas.CONCEPCION)){
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesConcepcion.csv"));
             }
-            else if(origen == Comunas.LOS_ANGELES && destino == Comunas.NACIMIENTO){
+            else if(origen.equals(Comunas.LOS_ANGELES) && destino.equals(Comunas.NACIMIENTO)){
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesNacimiento.csv"));
             }
-            else if(origen == Comunas.NACIMIENTO && destino == Comunas.CONCEPCION){
+            else if(origen.equals(Comunas.NACIMIENTO) && destino.equals(Comunas.CONCEPCION)){
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoConcepcion.csv"));
             }
-            else{
+            else if(origen.equals(Comunas.NACIMIENTO) && destino.equals(Comunas.LOS_ANGELES)) {
                 br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoLosAngeles.csv"));
+            }
+
+            if (br == null){
+                return null;
             }
 
             ArrayList<String> list = new ArrayList<>();

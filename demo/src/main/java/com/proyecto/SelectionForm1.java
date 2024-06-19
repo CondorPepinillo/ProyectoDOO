@@ -20,11 +20,15 @@ public class SelectionForm1 extends JFrame {
 
     JDateChooser dateChooser = new JDateChooser();
 
+    private Comunas origen;
+    private Comunas destino;
+
     public SelectionForm1() {
         /**
          * Se crea la ventana y sus elementos principales
          */
         JFrame frame = new JFrame("Panel Principal");
+        frame.setLocationRelativeTo(null);
         frame.getContentPane().add(panelPrincipal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -44,11 +48,23 @@ public class SelectionForm1 extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(origenComboBox1.getSelectedItem() != destinoComboBox1.getSelectedItem() && origenComboBox1 != null & destinoComboBox1 != null){
-                    pasajesHorariosUI ventanaSeleccion = new pasajesHorariosUI((Comunas) origenComboBox1.getSelectedItem(), (Comunas) destinoComboBox1.getSelectedItem(), dateChooser.getDate());
+
+                    origen = (Comunas) origenComboBox1.getSelectedItem();
+                    destino = (Comunas) destinoComboBox1.getSelectedItem();
+
+                    pasajesHorariosUI ventanaSeleccion = new pasajesHorariosUI(getOrigen(), getDestino(), dateChooser.getDate());
                     frame.dispose();
                 }
             }
         });
+    }
+
+    public Comunas getOrigen() {
+        return origen;
+    }
+
+    public Comunas getDestino() {
+        return destino;
     }
 
     private void createUIComponents() {
