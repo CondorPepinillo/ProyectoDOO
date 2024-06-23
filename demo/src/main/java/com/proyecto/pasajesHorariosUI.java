@@ -43,7 +43,8 @@ public class pasajesHorariosUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println();
+                System.out.println("Click en row: " + ListaBuses.getSelectedRow());
+                Bus bus = new Bus();
             }
         });
 
