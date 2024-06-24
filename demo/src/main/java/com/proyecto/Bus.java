@@ -1,37 +1,45 @@
 package com.proyecto;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Bus {
-    private JPanel panel1;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-    private JButton button7;
-    private JButton button8;
-    private JButton button9;
-    private JButton button10;
-    private JButton button11;
-    private JButton button12;
-    private JButton button13;
-    private JButton button14;
-    private JButton button15;
-    private JButton button16;
-    private JButton button17;
-    private JButton button18;
-    private JButton button19;
-    private JButton button20;
+
+    private int Asientos = 40;
+    ArrayList<Integer> listaAsientos = new ArrayList<>();
 
     public Bus(){
         JFrame frame = new JFrame("Panel Principal");
+        frame.setSize(600, 800);
+        JPanel panel1 = new JPanel();
+        JPanel panelLeft = new JPanel();
+        JPanel panelRigth = new JPanel();
+        GridLayout layoutButtons = new GridLayout(10, 2);
+        BorderLayout borderLayout = new BorderLayout();
+        panel1.setLayout(borderLayout);
+        panel1.add("West",panelLeft);
+        panel1.add("East",panelRigth);
+        panelLeft.setLayout(layoutButtons);
+        panelRigth.setLayout(layoutButtons);
+
+        for(int i = 0; i < Asientos; i++){
+          listaAsientos.add(0);
+            System.out.println(listaAsientos.get(i));
+        }
+
+        for(int i = 0; i < Asientos; i++){
+            if(i < Asientos/2){
+                panelLeft.add(new Button("" + (i + 1)));
+            }
+            else{
+                panelRigth.add(new Button("" + (i+1)));
+            }
+        }
         frame.setLocationRelativeTo(null);
         frame.getContentPane().add(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
