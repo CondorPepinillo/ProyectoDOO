@@ -29,6 +29,8 @@ public class Bus {
         panelLeft.setLayout(layoutButtons);
         panelRight.setLayout(layoutButtons);
 
+        System.out.println("prueba si deja hacer pull ahora");
+
         for (int i = 0; i < Asientos; i++) {
             listaAsientos.add(0);
             System.out.println(listaAsientos.get(i));
