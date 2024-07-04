@@ -44,7 +44,7 @@ public class pasajesHorariosUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                Bus bus = new Bus();
+                Bus bus = new Bus(origin, destination, fecha, getHorarioSalidaSeleccionado(), getPrecio());
             }
         });
 
@@ -106,5 +106,22 @@ public class pasajesHorariosUI {
     }
     Comunas getDestino(){
         return destino;
+    }
+    public String getHorarioSalidaSeleccionado() {
+        int selectedRow = ListaBuses.getSelectedRow();
+        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
+            return (String) ListaBuses.getValueAt(selectedRow, 1);
+        } else {
+            return null;
+        }
+    }
+
+    public String getPrecio() {
+        int selectedRow = ListaBuses.getSelectedRow();
+        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
+            return (String) ListaBuses.getValueAt(selectedRow, 5);
+        } else {
+            return null;
+        }
     }
 }

@@ -5,19 +5,26 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 public class Bus {
 
+    private Comunas origen;
+    private Comunas destino;
+    private Date fecha;
+    private String horaSalida;
+    private String precio;
     private int Asientos = 40;
     private ArrayList<Integer> listaAsientos = new ArrayList<>();
     private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
+    private int asientoSeleccionado = -1;
 
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus() {
+    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio) {
         JFrame frame = new JFrame("Panel Principal");
-        frame.setSize(600, 800);
+        frame.setSize(1000, 800);
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
@@ -28,8 +35,6 @@ public class Bus {
         panel1.add("East", panelRight);
         panelLeft.setLayout(layoutButtons);
         panelRight.setLayout(layoutButtons);
-
-        System.out.println("prueba si deja hacer pull ahora");
 
         for (int i = 0; i < Asientos; i++) {
             listaAsientos.add(0);
@@ -57,6 +62,7 @@ public class Bus {
                         listaAsientos.set(finalI, 1);
 
                         //ABIR SIGUIENTE VENTANA
+                        new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
                     }
                 }
             });
@@ -75,8 +81,5 @@ public class Bus {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        Bus bus = new Bus();
-    }
 }
 

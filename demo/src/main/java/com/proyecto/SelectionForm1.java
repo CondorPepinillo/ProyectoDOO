@@ -51,7 +51,7 @@ public class SelectionForm1 extends JFrame {
                     origen = (Comunas) origenComboBox1.getSelectedItem();
                     destino = (Comunas) destinoComboBox1.getSelectedItem();
 
-                    pasajesHorariosUI ventanaSeleccion = new pasajesHorariosUI(getOrigen(), getDestino(), dateChooser.getDate());
+                    pasajesHorariosUI ventanaSeleccion = new pasajesHorariosUI(origen, destino, dateChooser.getDate());
                     frame.dispose();
                 }
             }
