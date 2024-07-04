@@ -1,6 +1,8 @@
 package com.proyecto;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 
 public class VentanaPago extends JFrame {
@@ -25,6 +27,13 @@ public class VentanaPago extends JFrame {
 
         pack(); // Ajusta el tamaño de la ventana a los componentes
         setVisible(true);
+        descargarPasajeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
+            }
+        });
     }
 
     /**

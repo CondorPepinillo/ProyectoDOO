@@ -38,7 +38,6 @@ public class Bus {
 
         for (int i = 0; i < Asientos; i++) {
             listaAsientos.add(0);
-            System.out.println(listaAsientos.get(i));
         }
 
 
