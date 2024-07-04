@@ -41,7 +41,6 @@ public class Bus {
             System.out.println(listaAsientos.get(i));
         }
 
-        listaAsientos.set(20, 1);
 
         for (int i = 0; i < Asientos; i++) {
             JButton button = new JButton("" + (i + 1)); // Crear el botón
@@ -60,7 +59,7 @@ public class Bus {
                     else{
                         System.out.println("Botón " + button.getText() + " clickeado.");
                         listaAsientos.set(finalI, 1);
-
+                        button.setBackground(Color.RED);
                         //ABIR SIGUIENTE VENTANA
                         new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
                     }
