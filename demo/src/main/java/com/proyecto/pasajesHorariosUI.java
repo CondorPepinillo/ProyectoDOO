@@ -45,13 +45,14 @@ public class pasajesHorariosUI {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
                 Bus bus = new Bus(origin, destination, fecha, getHorarioSalidaSeleccionado(), getPrecio());
+                frame.dispose();
             }
         });
 
         scrollPane = new JScrollPane(ListaBuses);
         frame.setLocationRelativeTo(null);
         frame.add(scrollPane);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
