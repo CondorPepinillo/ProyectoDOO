@@ -52,7 +52,7 @@ public class pasajesHorariosUI {
         scrollPane = new JScrollPane(ListaBuses);
         frame.setLocationRelativeTo(null);
         frame.add(scrollPane);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
