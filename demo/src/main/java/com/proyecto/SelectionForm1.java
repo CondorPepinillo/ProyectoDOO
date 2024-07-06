@@ -5,6 +5,9 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SelectionForm1 extends JFrame {
     private JPanel panelPrincipal;
@@ -16,6 +19,7 @@ public class SelectionForm1 extends JFrame {
     private JPanel panelConElementos;
     private JPanel panelOrigenYDestino;
     private JPanel panelFecha;
+
 
     JDateChooser dateChooser = new JDateChooser();
 
@@ -46,7 +50,14 @@ public class SelectionForm1 extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(origenComboBox1.getSelectedItem() != destinoComboBox1.getSelectedItem() && origenComboBox1 != null & destinoComboBox1 != null){
+                Calendar fechaAux = Calendar.getInstance();
+                fechaAux.add(Calendar.DAY_OF_MONTH, -1);
+                Date fechaAux2 = fechaAux.getTime();
+                if(dateChooser.getDate().compareTo(fechaAux2) < 0){
+                    System.out.println("No puedes poner una fecha anterior");
+                }
+
+                if(origenComboBox1.getSelectedItem() != destinoComboBox1.getSelectedItem() && origenComboBox1 != null & destinoComboBox1 != null && dateChooser.getDate().compareTo(fechaAux2) >= 0){
 
                     origen = (Comunas) origenComboBox1.getSelectedItem();
                     destino = (Comunas) destinoComboBox1.getSelectedItem();
