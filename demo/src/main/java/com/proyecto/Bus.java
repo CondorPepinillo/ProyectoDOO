@@ -14,7 +14,6 @@ public class Bus {
     private Date fecha;
     private String horaSalida;
     private String precio;
-    private int Asientos = 40;
     private ArrayList<Integer> listaAsientos = new ArrayList<>();
     private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
     private int asientoSeleccionado = -1;
@@ -22,12 +21,20 @@ public class Bus {
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio) {
+    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor) {
+
+        int seats;
+        if (floor == 1) {
+            seats = 20;
+        } else {
+            seats = 40;
+        }
+
         JFrame frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
-        GridLayout layoutButtons = new GridLayout(10, 2);
+        GridLayout layoutButtons = new GridLayout(seats/4, 2);
         BorderLayout borderLayout = new BorderLayout();
         panel1.setLayout(borderLayout);
         panel1.add("West", panelLeft);
@@ -35,13 +42,15 @@ public class Bus {
         panelLeft.setLayout(layoutButtons);
         panelRight.setLayout(layoutButtons);
 
-        for (int i = 0; i < Asientos; i++) {
+        for (int i = 0; i < seats; i++) {
             listaAsientos.add(0);
         }
 
+        int startLabel = seats == 20 ? 1 : 21;
 
-        for (int i = 0; i < Asientos; i++) {
-            JButton button = new JButton("" + (i + 1)); // Crear el botón
+        for (int i = 0; i < seats; i++) {
+            int labelNumber = startLabel + i;
+            JButton button = new JButton("" + labelNumber); // Crear el botón
             if (listaAsientos.get(i) != 0){
                 button.setBackground(Color.RED);
             }
@@ -64,7 +73,7 @@ public class Bus {
                 }
             });
 
-            if (i < Asientos / 2) {
+            if (i < seats / 2) {
                 panelLeft.add(button); // Añadir el botón al panel izquierdo
             } else {
                 panelRight.add(button); // Añadir el botón al panel derecho
@@ -73,7 +82,11 @@ public class Bus {
 
         frame.getContentPane().add(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(250, 400));
+        if (seats <= 20) {
+            frame.setPreferredSize(new Dimension(250, 200));
+        } else {
+            frame.setPreferredSize(new Dimension(250, 400));
+        }
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);

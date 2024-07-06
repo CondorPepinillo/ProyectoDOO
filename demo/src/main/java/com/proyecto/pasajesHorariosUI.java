@@ -45,7 +45,7 @@ public class pasajesHorariosUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                Bus bus = new Bus(origin, destination, fecha, getHorarioSalidaSeleccionado(), getPrecio());
+                Bus bus = new Bus(origin, destination, fecha, getHorarioSalidaSeleccionado(), getPrecio(), getPiso());
                 frame.dispose();
             }
         });
@@ -126,6 +126,16 @@ public class pasajesHorariosUI {
             return (String) ListaBuses.getValueAt(selectedRow, 5);
         } else {
             return null;
+        }
+    }
+
+    public int getPiso() {
+        int selectedRow = ListaBuses.getSelectedRow();
+        if (selectedRow != -1) {
+            String pisoStr = (String) ListaBuses.getValueAt(selectedRow, 6);
+            return Integer.parseInt(pisoStr);
+        } else {
+            return -1;
         }
     }
 }
