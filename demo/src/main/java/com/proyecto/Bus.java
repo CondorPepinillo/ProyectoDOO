@@ -22,14 +22,7 @@ public class Bus {
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
     public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor) {
-
-        int seats;
-        if (floor == 1) {
-            seats = 20;
-        } else {
-            seats = 40;
-        }
-
+        int seats = floor == 1 ? 20 : 40;
         JFrame frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
@@ -37,6 +30,8 @@ public class Bus {
         GridLayout layoutButtons = new GridLayout(seats/4, 2);
         BorderLayout borderLayout = new BorderLayout();
         panel1.setLayout(borderLayout);
+        JLabel floorLabel = new JLabel(floor == 1 ? "Piso 1" : "Piso 2", SwingConstants.CENTER);
+        panel1.add(floorLabel, BorderLayout.NORTH);
         panel1.add("West", panelLeft);
         panel1.add("East", panelRight);
         panelLeft.setLayout(layoutButtons);
