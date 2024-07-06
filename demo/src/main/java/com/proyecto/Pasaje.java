@@ -22,7 +22,7 @@ public class Pasaje {
         System.out.println("      BUSES BIO-BIO        \n\n");
         System.out.println("Origen: "+ origen + "\n");
         System.out.println("Destino: "+ destino + "\n\n");
-        System.out.println("Fecha Viaje: " + fecha + "\n");
+        System.out.println("Fecha Viaje: " + fecha.getDate() + "/" + (fecha.getMonth()+1)+ "/"+ (fecha.getYear()+1900) + "\n");
         System.out.println("Hora Viaje: " + horaSalida + "\n");
         System.out.println("Asiento: " + asiento + "\n\n");
         System.out.println("Valor Pasaje: " + precio);
@@ -36,7 +36,7 @@ public class Pasaje {
             bw.write("\n      BUSES BIO-BIO        \n\n");
             bw.write("Origen: "+ origen + "\n");
             bw.write("Destino: "+ destino + "\n\n");
-            bw.write("Fecha Viaje: " + fecha + "\n");
+            bw.write("Fecha Viaje: " + fecha.getDate() + "/" +  (fecha.getMonth()+1)+ "/"+ (fecha.getYear()+1900) + "\n");
             bw.write("Hora Viaje: " + horaSalida + "\n");
             bw.write("Asiento: " + asiento + "\n\n");
             bw.write("Valor Pasaje: " + precio);
