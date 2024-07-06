@@ -24,7 +24,6 @@ public class Bus {
     **/
     public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio) {
         JFrame frame = new JFrame("Panel Principal");
-        frame.setSize(1000, 800);
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
@@ -72,11 +71,12 @@ public class Bus {
             }
         }
 
-        frame.setLocationRelativeTo(null);
         frame.getContentPane().add(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(250, 400));
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 }

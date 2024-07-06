@@ -1,6 +1,7 @@
 package com.proyecto;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
@@ -12,7 +13,6 @@ public class VentanaPago extends JFrame {
     public VentanaPago(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, String numeroAsiento) {
         // Configura la ventana
         setTitle("Ventana de Pago");
-        setSize(500, 400); // Ajusta el tamaño según sea necesario
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); // Centrar ventana
 
@@ -24,8 +24,9 @@ public class VentanaPago extends JFrame {
 
         // Añade el panel principal al JFrame
         setContentPane(panelPrincipal);
-
+        setPreferredSize(new Dimension(400, 250));
         pack(); // Ajusta el tamaño de la ventana a los componentes
+        setLocationRelativeTo(null); // Centra la ventana en la pantalla
         setVisible(true);
         descargarPasajeButton.addMouseListener(new MouseAdapter() {
             @Override

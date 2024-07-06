@@ -2,6 +2,7 @@ package com.proyecto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -27,7 +28,7 @@ public class pasajesHorariosUI {
         this.fecha = fecha;
 
         JFrame frame = new JFrame("Panel Seleccion Bus");
-        col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio"};
+        col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio", "Piso", "Tipo"};
         data = getData();
 
         DefaultTableModel model = new DefaultTableModel(data, col) {
@@ -53,7 +54,9 @@ public class pasajesHorariosUI {
         frame.setLocationRelativeTo(null);
         frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(800, 400));
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

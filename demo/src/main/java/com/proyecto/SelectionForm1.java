@@ -3,6 +3,7 @@ package com.proyecto;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -34,7 +35,9 @@ public class SelectionForm1 extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.getContentPane().add(panelPrincipal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(400, 200));
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         panelFecha.add(dateChooser);
