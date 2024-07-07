@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Clase pasajesHorariosUI
+ * Esta clase se encarga de manejar la seleccion del viaje acorde de las preferencias del usurio o cliente, los viajes presentan diversos factores como la hora, el tipo de bus y el tipo de asiento
+ */
+
 public class pasajesHorariosUI {
     private JPanel panel1;
     private JPanel busesLabelsPanel;
@@ -21,6 +26,13 @@ public class pasajesHorariosUI {
     private Date fecha;
     String[] col;
     Object[][] data;
+
+    /**
+     *
+     * @param origin es la comuna desde la que se toma el viaje
+     * @param destination la comuna de destino del viaje
+     * @param fecha el dia del viaje
+     */
 
     public pasajesHorariosUI(Comunas origin, Comunas destination, Date fecha){
         this.origen = origin;
@@ -105,12 +117,26 @@ public class pasajesHorariosUI {
         }
     }
 
+    /**
+     *
+     * @return origen,  retorna la comuna de origen
+     */
     Comunas getOrigen(){
         return origen;
     }
+
+    /**
+     *
+     * @return destino,  retorna la comuna de destino
+     */
     Comunas getDestino(){
         return destino;
     }
+
+    /**
+     *
+     * @return Horirio, retorna el elemento horario de la fila clickiada castiado en String
+     */
     public String getHorarioSalidaSeleccionado() {
         int selectedRow = ListaBuses.getSelectedRow();
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
@@ -120,6 +146,10 @@ public class pasajesHorariosUI {
         }
     }
 
+    /**
+     *
+     * @return  Precio, retorna el elemento precio de la fila clickiada castiado en String
+     */
     public String getPrecio() {
         int selectedRow = ListaBuses.getSelectedRow();
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
@@ -128,7 +158,10 @@ public class pasajesHorariosUI {
             return null;
         }
     }
-
+    /**
+     *
+     * @return  Piso, retorna el piso del bus en el que se viaja (piso 1 o piso 2) castiado en String
+     */
     public int getPiso() {
         int selectedRow = ListaBuses.getSelectedRow();
         if (selectedRow != -1) {

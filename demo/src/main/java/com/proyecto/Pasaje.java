@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
 
+/**
+ *
+ */
 public class Pasaje {
     private Date fecha;
     private String horaSalida;
