@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.util.Date;
 
 /**
- *
+ *Clase Pasaje, se encarga de escribir tu pasaje tanto en consola como en un archivo txt
  */
 public class Pasaje {
     private Date fecha;
