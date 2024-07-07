@@ -33,6 +33,9 @@ class pasajesHorariosUITest {
         assertNotEquals(test.getOrigen(), test.getDestino());
     }
 
+
+    //Los siguientes test funciones parecen no funcionar con JUNIT test
+
     @Test
     void getHorarioSalidaSeleccionado() {
         try {
