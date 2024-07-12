@@ -40,8 +40,9 @@ public class pasajesHorariosUI {
         this.fecha = fecha;
 
         JFrame frame = new JFrame("Panel Seleccion Bus");
+        Data datos = new Data(origen, destino);
         col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio", "Piso", "Tipo"};
-        data = getData();
+        data = datos.getData();
 
         DefaultTableModel model = new DefaultTableModel(data, col) {
             @Override
@@ -72,50 +73,6 @@ public class pasajesHorariosUI {
         frame.setVisible(true);
     }
 
-
-    Object[][] getData(){
-        try{
-            BufferedReader br = null;
-            if (origen.equals(Comunas.CONCEPCION) && destino.equals(Comunas.LOS_ANGELES)){
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionLosAngeles.csv"));
-            }
-            else if(origen.equals(Comunas.CONCEPCION) && destino.equals(Comunas.NACIMIENTO)){
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\ConcepcionNacimiento.csv"));
-            }
-            else if(origen.equals(Comunas.LOS_ANGELES) && destino.equals(Comunas.CONCEPCION)){
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesConcepcion.csv"));
-            }
-            else if(origen.equals(Comunas.LOS_ANGELES) && destino.equals(Comunas.NACIMIENTO)){
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\LosAngelesNacimiento.csv"));
-            }
-            else if(origen.equals(Comunas.NACIMIENTO) && destino.equals(Comunas.CONCEPCION)){
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoConcepcion.csv"));
-            }
-            else if(origen.equals(Comunas.NACIMIENTO) && destino.equals(Comunas.LOS_ANGELES)) {
-                br = new BufferedReader(new FileReader("..\\ProyectoDOO\\demo\\src\\buses\\NacimientoLosAngeles.csv"));
-            }
-
-            if (br == null){
-                return null;
-            }
-
-            ArrayList<String> list = new ArrayList<>();
-            String str = "";
-            while ((str = br.readLine()) != null){
-                list.add(str);
-            }
-            int n = list.get(0).split(",").length;
-            Object[][] data = new Object[list.size()][n];
-            for (int i = 0; i < list.size(); i++){
-                data[i] = list.get(i).split(",");
-            }
-            br.close();
-            return data;
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
      *
