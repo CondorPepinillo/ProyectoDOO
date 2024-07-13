@@ -5,11 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Clase pasajesHorariosUI
@@ -52,13 +48,14 @@ public class pasajesHorariosUI {
         };
 
         ListaBuses = new JTable(model);
+        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses);
 
         ListaBuses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                Bus bus = new Bus(origin, destination, fecha, getHorarioSalidaSeleccionado(), getPrecio(), getPiso());
+                Bus bus = new Bus(origin, destination, fecha, pasajesHorariosLogica.getHorarioSalidaSeleccionado(), pasajesHorariosLogica.getPrecio(), pasajesHorariosLogica.getPiso());
                 frame.dispose();
             }
         });
@@ -71,61 +68,5 @@ public class pasajesHorariosUI {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-
-    /**
-     *
-     * @return origen,  retorna la comuna de origen
-     */
-    Comunas getOrigen(){
-        return origen;
-    }
-
-    /**
-     *
-     * @return destino,  retorna la comuna de destino
-     */
-    Comunas getDestino(){
-        return destino;
-    }
-
-    /**
-     *
-     * @return Horirio, retorna el elemento horario de la fila clickiada castiado en String
-     */
-    public String getHorarioSalidaSeleccionado() {
-        int selectedRow = ListaBuses.getSelectedRow();
-        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
-            return (String) ListaBuses.getValueAt(selectedRow, 1);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     *
-     * @return  Precio, retorna el elemento precio de la fila clickiada castiado en String
-     */
-    public String getPrecio() {
-        int selectedRow = ListaBuses.getSelectedRow();
-        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
-            return (String) ListaBuses.getValueAt(selectedRow, 5);
-        } else {
-            return null;
-        }
-    }
-    /**
-     *
-     * @return  Piso, retorna el piso del bus en el que se viaja (piso 1 o piso 2) castiado en String
-     */
-    public int getPiso() {
-        int selectedRow = ListaBuses.getSelectedRow();
-        if (selectedRow != -1) {
-            String pisoStr = (String) ListaBuses.getValueAt(selectedRow, 6);
-            return Integer.parseInt(pisoStr);
-        } else {
-            return -1;
-        }
     }
 }

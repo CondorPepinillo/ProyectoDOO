@@ -1,0 +1,11 @@
+
+      BUSES BIO-BIO        
+
+Origen: CONCEPCION
+Destino: NACIMIENTO
+
+Fecha Viaje: 24/7/2024
+Hora Viaje: 8:00
+Asiento: 32
+
+Valor Pasaje: $7.000
