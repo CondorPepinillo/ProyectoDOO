@@ -6,9 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Clase SelectionForm1, clase que se encarga de iniciar la ventana principal y de la seleccion de elementos del viaje siendo estos la comuna de origen, comuna de destino y fecha del viaje
@@ -26,9 +23,6 @@ public class SelectionForm1 extends JFrame {
 
 
     JDateChooser dateChooser = new JDateChooser();
-
-    private Comunas origen;
-    private Comunas destino;
 
     public SelectionForm1() {
         /**
