@@ -48,15 +48,14 @@ public class pasajesHorariosUI {
         };
 
         ListaBuses = new JTable(model);
-        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses);
+        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
 
         ListaBuses.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                Bus bus = new Bus(origin, destination, fecha, pasajesHorariosLogica.getHorarioSalidaSeleccionado(), pasajesHorariosLogica.getPrecio(), pasajesHorariosLogica.getPiso());
-                frame.dispose();
+                pasajesHorariosLogica.mostrarBus(ListaBuses.getSelectedRow());
             }
         });
 

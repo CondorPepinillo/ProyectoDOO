@@ -18,12 +18,14 @@ public class Bus {
     private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
     private int asientoSeleccionado = -1;
 
+    private JFrame frame;
+
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
     public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor) {
         int seats = floor == 1 ? 20 : 40;
-        JFrame frame = new JFrame("Panel Principal");
+        frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
@@ -83,9 +85,10 @@ public class Bus {
             frame.setPreferredSize(new Dimension(250, 400));
         }
         frame.pack();
+    }
+    void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
-
 }
 

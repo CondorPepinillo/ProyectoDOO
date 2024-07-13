@@ -1,11 +1,23 @@
 package com.proyecto;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 public class PasajesHorariosLogica {
     private JTable ListaBuses;
-    public  PasajesHorariosLogica(JTable ListaBuses){
+    private int rows;
+    private ArrayList<Bus> ListaBusClass;
+
+    public  PasajesHorariosLogica(JTable ListaBuses, Comunas origen, Comunas destino, Date fecha){
         this.ListaBuses = ListaBuses;
+        rows = ListaBuses.getRowCount();
+        ListaBusClass = new ArrayList<>();
+        for(int i = 0; i < rows; i++){
+            Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(), getPrecio(), getPiso());
+            ListaBusClass.add(bus);
+        }
     }
     /**
      *
@@ -44,5 +56,9 @@ public class PasajesHorariosLogica {
         } else {
             return -1;
         }
+    }
+
+    public void mostrarBus(int row){
+        ListaBusClass.get(row).mostrarBus();
     }
 }
