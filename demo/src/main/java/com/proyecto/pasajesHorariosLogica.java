@@ -8,15 +8,15 @@ import java.util.Date;
 public class PasajesHorariosLogica {
     private JTable ListaBuses;
     private int rows;
-    private ArrayList<Bus> ListaBusClass;
+    private ListaBusClass listaBusClass;
 
     public  PasajesHorariosLogica(JTable ListaBuses, Comunas origen, Comunas destino, Date fecha){
         this.ListaBuses = ListaBuses;
         rows = ListaBuses.getRowCount();
-        ListaBusClass = new ArrayList<>();
+        listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
             Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(), getPrecio(), getPiso());
-            ListaBusClass.add(bus);
+            listaBusClass.addBus(bus);
         }
     }
     /**
@@ -59,6 +59,6 @@ public class PasajesHorariosLogica {
     }
 
     public void mostrarBus(int row){
-        ListaBusClass.get(row).mostrarBus();
+        listaBusClass.get(row).mostrarBus();
     }
 }
