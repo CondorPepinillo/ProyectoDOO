@@ -37,16 +37,12 @@ public class BusInfo {
 
                     //BufferedWriter writer = new BufferedWriter(new FileWriter(path, false));
                     //writer.write(data[0] + "," + data[1] + "," + data[2] + "," + data[3] + "," + seats + "," + data[5] + "," + data[6] + "," + data[7] + "\n");
-                    
+
                     System.out.println("Bus from " + path + " on floor " + floor + " has " + seats + " seats.");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void startApplication() {
-        SelectionForm1 ventana = new SelectionForm1();
     }
 }
