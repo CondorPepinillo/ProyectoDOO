@@ -66,7 +66,7 @@ public class Bus {
                         listaAsientos.set(finalI, 1);
                         button.setBackground(Color.RED);
                         //ABIR SIGUIENTE VENTANA
-                        pasajesHorariosLogica.asientoComprado(Integer.parseInt(button.getText()), horaSalida);
+
                         new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
                     }
                 }

@@ -57,18 +57,6 @@ public class PasajesHorariosLogica {
             return -1;
         }
     }
-
-    public void asientoComprado(int numeroAsiento, String horaSalida) {
-        for (int i = 0; i < ListaBuses.getRowCount(); i++) {
-            String horario = (String) ListaBuses.getValueAt(i, 1);
-            if (horario.equals(horaSalida)) {
-                int asientosDisponibles = Integer.parseInt((String) ListaBuses.getValueAt(i, 4));
-                asientosDisponibles--;
-                ListaBuses.setValueAt(String.valueOf(asientosDisponibles), i, 4);
-                break;
-            }
-        }
-    }
     public void mostrarBus(int row){
         listaBusClass.get(row).mostrarBus();
     }
