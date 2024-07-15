@@ -15,7 +15,7 @@ public class PasajesHorariosLogica {
         rows = ListaBuses.getRowCount();
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
-            Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(), getPrecio(), getPiso());
+            Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(i), getPrecio(i), getPiso());
             listaBusClass.addBus(bus);
         }
     }
@@ -23,8 +23,8 @@ public class PasajesHorariosLogica {
      *
      * @return Horirio, retorna el elemento horario de la fila clickiada castiado en String
      */
-    public String getHorarioSalidaSeleccionado() {
-        int selectedRow = ListaBuses.getSelectedRow();
+    public String getHorarioSalidaSeleccionado(int i) {
+        int selectedRow = i;
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 1);
         } else {
@@ -36,8 +36,8 @@ public class PasajesHorariosLogica {
      *
      * @return  Precio, retorna el elemento precio de la fila clickiada castiado en String
      */
-    public String getPrecio() {
-        int selectedRow = ListaBuses.getSelectedRow();
+    public String getPrecio(int i) {
+        int selectedRow = i;
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 5);
         } else {
