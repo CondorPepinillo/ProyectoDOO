@@ -48,7 +48,13 @@ public class pasajesHorariosUI {
         };
 
         ListaBuses = new JTable(model);
-        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
+        //PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
+        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica.Builder()
+                .ListaBuses(ListaBuses)
+                .origen(origen)
+                .destino(destination)
+                .fecha(fecha)
+                .build();
 
         ListaBuses.addMouseListener(new MouseAdapter() {
             @Override
