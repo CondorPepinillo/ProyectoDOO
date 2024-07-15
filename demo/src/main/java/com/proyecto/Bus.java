@@ -77,7 +77,15 @@ public class Bus {
                         //ABIR SIGUIENTE VENTANA
                         BusLogica busLogica = new BusLogica(rows, table);
                         busLogica.restarAsiento();
-                        new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
+                        //new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
+                        new VentanaPago.Builder()
+                                .origen(origen)
+                                .destino(destino)
+                                .fecha(fecha)
+                                .horaSalida(horaSalida)
+                                .precio(precio)
+                                .numeroAsiento(button.getText())
+                                .build();
                     }
                 }
             });

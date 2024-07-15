@@ -4,8 +4,8 @@
 Origen: CONCEPCION
 Destino: LOS_ANGELES
 
-Fecha Viaje: 18/7/2024
+Fecha Viaje: 19/7/2024
 Hora Viaje: 12:00
-Asiento: 53
+Asiento: 34
 
-Valor Pasaje: $6.000
+Valor Pasaje: $5.000
