@@ -2,10 +2,10 @@
       BUSES BIO-BIO        
 
 Origen: CONCEPCION
-Destino: LOS_ANGELES
+Destino: CONCEPCION
 
-Fecha Viaje: 24/7/2024
-Hora Viaje: 12:00
-Asiento: 55
+Fecha Viaje: 18/7/2024
+Hora Viaje: 21:00
+Asiento: 34
 
-Valor Pasaje: $6.000
+Valor Pasaje: $5.500

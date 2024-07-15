@@ -1,7 +1,6 @@
 package com.proyecto;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
@@ -9,25 +8,32 @@ import java.awt.event.MouseEvent;
 import java.util.Date;
 
 public class Bus {
-
     private Comunas origen;
     private Comunas destino;
     private Date fecha;
     private String horaSalida;
     private String precio;
-    private ArrayList<Integer> listaAsientos = new ArrayList<>();
-    private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
-    private JFrame frame;
+    private int floor;
     private int rows;
     private JTable table;
 
+    private ArrayList<Integer> listaAsientos = new ArrayList<>();
+    private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
+    private JFrame frame;
 
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor, int rows, JTable table) {
-        this.rows = rows;
-        this.table = table;
+    public Bus(Builder builder) {
+        this.origen = builder.origen;
+        this.destino = builder.destino;
+        this.fecha = builder.fecha;
+        this.horaSalida = builder.horaSalida;
+        this.precio = builder.precio;
+        this.floor = builder.floor;
+        this.rows = builder.rows;
+        this.table = builder.table;
+
         int seats = floor == 1 ? 20 : 40;
         frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
@@ -97,5 +103,59 @@ public class Bus {
         frame.setLocationRelativeTo(null);
     }
 
+    public static class Builder{
+        private Comunas origen;
+        private Comunas destino;
+        private Date fecha;
+        private String horaSalida;
+        private String precio;
+        private int floor;
+        private int rows;
+        private JTable table;
+
+        public Bus.Builder origen(Comunas origen){
+            this.origen = origen;
+            return this;
+        }
+
+        public Bus.Builder destino(Comunas destino){
+            this.destino = origen;
+            return this;
+        }
+
+        public Bus.Builder fecha(Date fecha){
+            this.fecha = fecha;
+            return this;
+        }
+
+        public Bus.Builder horaSalida(String horaSalida){
+            this.horaSalida = horaSalida;
+            return this;
+        }
+
+        public Bus.Builder precio(String precio){
+            this.precio = precio;
+            return this;
+        }
+
+        public Bus.Builder floor(int floor){
+            this.floor = floor;
+            return this;
+        }
+
+        public Bus.Builder rows(int rows){
+            this.rows = rows;
+            return this;
+        }
+
+        public Bus.Builder table(JTable table){
+            this.table = table;
+            return this;
+        }
+
+        public Bus build(){
+            return new Bus(this);
+        }
+    }
 }
 
