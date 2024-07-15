@@ -10,7 +10,20 @@ public class VentanaPago extends JFrame {
     private JPanel panelPrincipal;
     private JButton descargarPasajeButton;
 
-    public VentanaPago(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, String numeroAsiento) {
+    private Comunas origen;
+    private Comunas destino;
+    private Date fecha;
+    private String horaSalida;
+    private String precio;
+    private String numeroAsiento;
+
+    public VentanaPago(Builder builder) {
+        this.origen = builder.origen;
+        this.destino = builder.destino;
+        this.fecha = builder.fecha;
+        this.horaSalida = builder.horaSalida;
+        this.precio = builder.precio;
+        this.numeroAsiento = builder.numeroAsiento;
         // Configura la ventana
         setTitle("Ventana de Pago");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -32,9 +45,59 @@ public class VentanaPago extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
+                //Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
+                Pasaje pasaje = new Pasaje.Builder()
+                        .origen(origen)
+                        .destino(destino)
+                        .fecha(fecha)
+                        .horaSalida(horaSalida)
+                        .precio(precio)
+                        .asiento(numeroAsiento)
+                        .build();
             }
         });
+    }
+    public static class Builder{
+        private Comunas origen;
+        private Comunas destino;
+        private Date fecha;
+        private String horaSalida;
+        private String precio;
+        private String numeroAsiento;
+
+        public VentanaPago.Builder origen(Comunas origen){
+            this.origen = origen;
+            return  this;
+        }
+
+        public VentanaPago.Builder destino(Comunas destino){
+            this.destino = destino;
+            return this;
+        }
+
+        public VentanaPago.Builder fecha(Date fecha){
+            this.fecha = fecha;
+            return this;
+        }
+
+        public VentanaPago.Builder horaSalida(String horaSalida){
+            this.horaSalida = horaSalida;
+            return this;
+        }
+
+        public VentanaPago.Builder precio(String precio){
+            this.precio = precio;
+            return this;
+        }
+
+        public VentanaPago.Builder numeroAsiento(String numeroAsiento){
+            this.numeroAsiento = numeroAsiento;
+            return this;
+        }
+
+        public VentanaPago build(){
+            return new VentanaPago(this);
+        }
     }
 
     /**

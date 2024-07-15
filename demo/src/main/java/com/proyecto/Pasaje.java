@@ -1,5 +1,7 @@
 package com.proyecto;
 
+import org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,18 +11,20 @@ import java.util.Date;
  *Clase Pasaje, se encarga de escribir tu pasaje tanto en consola como en un archivo txt
  */
 public class Pasaje {
-    private Date fecha;
-    private String horaSalida;
-    private int asiento;
     private Comunas origen;
     private Comunas destino;
+    private Date fecha;
+    private String horaSalida;
+    private String precio;
+    private int asiento;
 
-    public Pasaje(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, String asiento) {
-        this.fecha = fecha;
-        this.horaSalida = horaSalida;
-        this.asiento = Integer.parseInt(asiento);
-        this.origen = origen;
-        this.destino = destino;
+    public Pasaje(Builder builder) {
+        this.origen = builder.origen;
+        this.destino = builder.destino;
+        this.fecha = builder.fecha;
+        this.horaSalida = builder.horaSalida;
+        this.precio = builder.precio;
+        this.asiento = Integer.parseInt(builder.asiento);
 
         System.out.println("      BUSES BIO-BIO        \n\n");
         System.out.println("Origen: "+ origen + "\n");
@@ -69,5 +73,51 @@ public class Pasaje {
 
     public Comunas getDestino() {
         return destino;
+    }
+
+
+    public static class Builder{
+        private Comunas origen;
+        private Comunas destino;
+        private Date fecha;
+        private String horaSalida;
+        private String precio;
+        private String asiento;
+
+
+        public Pasaje.Builder origen(Comunas origen){
+            this.origen = origen;
+            return this;
+        }
+
+        public Pasaje.Builder destino(Comunas destino) {
+            this.destino = destino;
+            return this;
+        }
+
+        public Pasaje.Builder fecha(Date fecha) {
+            this.fecha = fecha;
+            return this;
+        }
+
+        public Pasaje.Builder horaSalida(String horaSalida) {
+            this.horaSalida = horaSalida;
+            return this;
+        }
+
+        public Pasaje.Builder precio(String precio) {
+            this.precio = precio;
+            return this;
+        }
+
+        public Pasaje.Builder asiento(String asiento) {
+            this.asiento = asiento;
+            return this;
+        }
+
+        public Pasaje build(){
+            return new Pasaje(this);
+        }
+
     }
 }
