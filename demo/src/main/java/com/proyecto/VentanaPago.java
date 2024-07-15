@@ -32,7 +32,15 @@ public class VentanaPago extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
+                //Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
+                Pasaje pasaje = new Pasaje.Builder()
+                        .origen(origen)
+                        .destino(destino)
+                        .fecha(fecha)
+                        .horaSalida(horaSalida)
+                        .precio(precio)
+                        .asiento(numeroAsiento)
+                        .build();
             }
         });
     }

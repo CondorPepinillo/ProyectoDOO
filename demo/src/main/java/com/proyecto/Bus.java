@@ -119,7 +119,7 @@ public class Bus {
         }
 
         public Bus.Builder destino(Comunas destino){
-            this.destino = origen;
+            this.destino = destino;
             return this;
         }
 
