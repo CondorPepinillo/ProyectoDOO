@@ -1,6 +1,7 @@
 package com.proyecto;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
@@ -17,11 +18,16 @@ public class Bus {
     private ArrayList<Integer> listaAsientos = new ArrayList<>();
     private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
     private JFrame frame;
+    private int rows;
+    private JTable table;
+
 
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor) {
+    public Bus(Comunas origen, Comunas destino, Date fecha, String horaSalida, String precio, int floor, int rows, JTable table) {
+        this.rows = rows;
+        this.table = table;
         int seats = floor == 1 ? 20 : 40;
         frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
@@ -63,7 +69,7 @@ public class Bus {
                         listaAsientos.set(finalI, 1);
                         button.setBackground(Color.RED);
                         //ABIR SIGUIENTE VENTANA
-
+                        restarAsiento();
                         new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
                     }
                 }
@@ -88,6 +94,32 @@ public class Bus {
     void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+    }
+
+    void restarAsiento() {
+        // Obtener el valor actual de número de asientos
+        Object valor = table.getValueAt(rows, 4);
+
+        // Convertir el valor a entero de manera segura
+        int numeroAsientos = 0;
+        if (valor != null) {
+            try {
+                // Intentar convertir el valor a entero
+                numeroAsientos = Integer.parseInt(valor.toString());
+
+                // Restar 1 al número de asientos
+                numeroAsientos--;
+
+                // Actualizar el valor en la tabla
+                table.setValueAt(numeroAsientos, rows, 4);
+            } catch (NumberFormatException e) {
+                // Manejar el caso donde el valor no se puede convertir a entero
+                System.err.println("No se pudo convertir el valor a entero: " + e.getMessage());
+            }
+        } else {
+            // Manejar el caso donde el valor es nulo
+            System.err.println("El valor en la posición indicada es nulo.");
+        }
     }
 }
 

@@ -15,7 +15,7 @@ public class PasajesHorariosLogica {
         rows = ListaBuses.getRowCount();
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
-            Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(i), getPrecio(i), getPiso());
+            Bus bus = new Bus(origen, destino, fecha, getHorarioSalidaSeleccionado(i), getPrecio(i), getPiso(), i, ListaBuses);
             listaBusClass.addBus(bus);
         }
     }
