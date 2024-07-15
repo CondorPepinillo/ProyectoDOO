@@ -69,7 +69,8 @@ public class Bus {
                         listaAsientos.set(finalI, 1);
                         button.setBackground(Color.RED);
                         //ABIR SIGUIENTE VENTANA
-                        restarAsiento();
+                        BusLogica busLogica = new BusLogica(rows, table);
+                        busLogica.restarAsiento();
                         new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
                     }
                 }
@@ -96,30 +97,5 @@ public class Bus {
         frame.setLocationRelativeTo(null);
     }
 
-    void restarAsiento() {
-        // Obtener el valor actual de número de asientos
-        Object valor = table.getValueAt(rows, 4);
-
-        // Convertir el valor a entero de manera segura
-        int numeroAsientos = 0;
-        if (valor != null) {
-            try {
-                // Intentar convertir el valor a entero
-                numeroAsientos = Integer.parseInt(valor.toString());
-
-                // Restar 1 al número de asientos
-                numeroAsientos--;
-
-                // Actualizar el valor en la tabla
-                table.setValueAt(numeroAsientos, rows, 4);
-            } catch (NumberFormatException e) {
-                // Manejar el caso donde el valor no se puede convertir a entero
-                System.err.println("No se pudo convertir el valor a entero: " + e.getMessage());
-            }
-        } else {
-            // Manejar el caso donde el valor es nulo
-            System.err.println("El valor en la posición indicada es nulo.");
-        }
-    }
 }
 
