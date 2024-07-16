@@ -46,6 +46,7 @@ public class PasajesHorariosLogica {
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 1);
         } else {
+            System.err.println("No se selecciono fila");
             return null;
         }
     }
@@ -59,6 +60,7 @@ public class PasajesHorariosLogica {
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 5);
         } else {
+            System.err.println("No se selecciono fila");
             return null;
         }
     }
