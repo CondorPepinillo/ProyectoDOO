@@ -89,6 +89,7 @@ public class Bus {
                                 .numeroAsiento(button.getText())
                                 .tipoAsiento(tipoAsiento)
                                 .build();
+
                     }
                 }
             });

@@ -1,8 +1,19 @@
 package com.proyecto;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import com.itextpdf.barcodes.Barcode128;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+
+import java.io.*;
 import java.util.Date;
 
 /**
@@ -32,27 +43,10 @@ public class Pasaje {
         System.out.println("Fecha Viaje: " + fecha.getDate() + "/" + (fecha.getMonth()+1)+ "/"+ (fecha.getYear()+1900) + "\n");
         System.out.println("Hora Viaje: " + horaSalida + "\n");
         System.out.println("Asiento: " + asiento + "\n\n");
+        System.out.println("Tipo Asiento: " + tipoAsiento + "\n\n");
         System.out.println("Valor Pasaje: " + precio);
 
-
-        File file = new File("../ProyectoDOO/Pasaje.txt");
-        try {
-            file.createNewFile();
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("\n      BUSES BIO-BIO        \n\n");
-            bw.write("Origen: "+ origen + "\n");
-            bw.write("Destino: "+ destino + "\n\n");
-            bw.write("Fecha Viaje: " + fecha.getDate() + "/" +  (fecha.getMonth()+1)+ "/"+ (fecha.getYear()+1900) + "\n");
-            bw.write("Hora Viaje: " + horaSalida + "\n");
-            bw.write("Asiento: " + asiento + "\n\n");
-            bw.write("Valor Pasaje: " + precio);
-
-            bw.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        descargarPasajePDF();
     }
 
     public Date getFecha() {
@@ -75,6 +69,108 @@ public class Pasaje {
         return destino;
     }
 
+    public void descargarPasajePDF() {
+        String baseFileName = "Pasaje";
+        String fileExtension = ".pdf";
+        String directoryPath = "../ProyectoDOO/";
+
+        //Verificar si existe el archivo base existe
+        int count = 0;
+        String fileName = baseFileName + fileExtension;
+        File file = new File(directoryPath + fileName);
+        while (file.exists()) {
+            count++;
+            fileName = baseFileName + "(" + count + ")" + fileExtension;
+            file = new File(directoryPath + fileName);
+        }
+
+        try (PdfWriter pdfWriter = new PdfWriter(file)) {
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+            Document document = new Document(pdfDocument, PageSize.A4);
+
+            // Añadir barra azul superior con texto alineado a la izquierda
+            Table headerTable = new Table(UnitValue.createPercentArray(new float[]{1, 4}));
+            headerTable.setWidth(UnitValue.createPercentValue(100));
+            headerTable.setBackgroundColor(ColorConstants.BLUE);
+            headerTable.setHeight(25);
+
+            Cell textCell = new Cell().add(new Paragraph("PASAJE BUS BIO-BIO")
+                            .setBold()
+                            .setFontColor(ColorConstants.WHITE)
+                            .setTextAlignment(TextAlignment.LEFT))
+                    .setBorder(null);
+
+            headerTable.addCell(textCell);
+            headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(null));
+
+            document.add(headerTable);
+
+            // Crear tabla principal para disposición
+            float[] mainTableWidths = {1, 2, 1}; // Tres columnas: etiquetas, información, código de barras
+            Table mainTable = new Table(UnitValue.createPercentArray(mainTableWidths));
+            mainTable.setWidth(UnitValue.createPercentValue(100));
+
+            // Columna 1: etiquetas
+            Table labelsTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+            labelsTable.addCell(new Cell().add(new Paragraph("Origen:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Destino:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Fecha:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Hora de Salida:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Tipo de Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+            labelsTable.addCell(new Cell().add(new Paragraph("Precio:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+
+            mainTable.addCell(new Cell().add(labelsTable).setBorder(null));
+
+            // Columna 2: información del pasaje
+            Table infoTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+            infoTable.addCell(new Cell().add(new Paragraph(origen.toString())));
+            infoTable.addCell(new Cell().add(new Paragraph(destino.toString())));
+            infoTable.addCell(new Cell().add(new Paragraph(fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + (fecha.getYear() + 1900))));
+            infoTable.addCell(new Cell().add(new Paragraph(horaSalida)));
+            infoTable.addCell(new Cell().add(new Paragraph(String.valueOf(asiento))));
+            infoTable.addCell(new Cell().add(new Paragraph(tipoAsiento)));
+            infoTable.addCell(new Cell().add(new Paragraph(precio)));
+
+            mainTable.addCell(new Cell().add(infoTable).setBorder(null));
+
+            // Columna 3: código de barras (rotado)
+            Table barcodeTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+            Barcode128 barcode = new Barcode128(pdfDocument);
+            barcode.setCode(getCode());
+            Image barcodeImage = new Image(barcode.createFormXObject(pdfDocument));
+            barcodeImage.setWidth(150);
+            barcodeImage.setHeight(75);
+
+            barcodeTable.addCell(new Cell().add(barcodeImage).setBorder(null));
+
+            mainTable.addCell(new Cell().add(barcodeTable).setBorder(null));
+
+            document.add(mainTable);
+
+            // Añadir línea azul en la parte inferior
+            document.add(new Paragraph("")
+                    .setBackgroundColor(ColorConstants.BLUE)
+                    .setHeight(25)
+                    .setMarginTop(1));
+
+            document.close();
+            pdfDocument.close();
+
+            System.out.println("Pasaje descargado en PDF");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public String getCode() {
+        double eightDigits = 10000000 + Math.random() * 90000000;
+        String barcode = String.valueOf((int) eightDigits);
+        return barcode;
+    }
 
     public static class Builder{
         private Comunas origen;
