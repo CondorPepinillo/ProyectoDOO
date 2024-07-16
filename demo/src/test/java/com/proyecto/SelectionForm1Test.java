@@ -33,7 +33,7 @@ class SelectionForm1Test {
     public void testButtonClick() {
         SwingUtilities.invokeLater(() -> {
             // Simular un clic en el botón submit
-            selectionForm.submit.doClick();           //Haga submit pulico para que el test funcione
+            selectionForm.getSubmit().doClick();
 
             // Verificar que se haya creado una instancia de SelectionFormLogica
             JFrame[] frames = (JFrame[]) JFrame.getFrames();

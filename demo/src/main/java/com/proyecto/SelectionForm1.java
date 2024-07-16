@@ -14,7 +14,7 @@ public class SelectionForm1 extends JFrame {
     private JPanel panelPrincipal;
     private JComboBox<Comunas> origenComboBox1;
     private JComboBox<Comunas> destinoComboBox1;
-    public JButton submit;                 //Hagase public para que los junit test funcionen correctamente
+    private JButton submit;
     private JPanel panel1;
     private JPanel labelTitulo;
     private JPanel panelConElementos;
@@ -54,6 +54,10 @@ public class SelectionForm1 extends JFrame {
             }
         });
 
+    }
+
+    public JButton getSubmit(){  //Se usa para el test
+        return submit;
     }
 
     private void createUIComponents() {

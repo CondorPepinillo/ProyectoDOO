@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SelectionFormLogicaTest {
 
     @Test
-    public void testValidSelection() {
+    public void testValidSelection() {             //Desconozco porque el test no puede leer los cvs
         // Mock objects
         JDateChooser dateChooser = new JDateChooser();
         JComboBox<Comunas> origenComboBox = new JComboBox<>();
