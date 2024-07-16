@@ -80,7 +80,7 @@ public class Pasaje {
         File file = new File(directoryPath + fileName);
         while (file.exists()) {
             count++;
-            fileName = baseFileName + "(" + count + ")" + fileExtension;
+            fileName = baseFileName + " (" + count + ")" + fileExtension;
             file = new File(directoryPath + fileName);
         }
 
