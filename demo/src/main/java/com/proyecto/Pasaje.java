@@ -1,7 +1,5 @@
 package com.proyecto;
 
-import org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
