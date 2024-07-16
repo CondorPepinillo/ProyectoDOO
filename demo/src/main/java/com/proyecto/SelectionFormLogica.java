@@ -1,7 +1,5 @@
 package com.proyecto;
-
 import com.toedter.calendar.JDateChooser;
-
 import javax.swing.*;
 import java.util.Calendar;
 import java.util.Date;

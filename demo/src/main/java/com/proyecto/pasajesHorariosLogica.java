@@ -18,6 +18,9 @@ public class PasajesHorariosLogica {
         this.destino = builder.destino;
         this.fecha = builder.fecha;
         rows = ListaBuses.getRowCount();
+        if(rows <= 0){
+            System.err.println("NO puede ser 0 o menor");
+        }
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
             Bus bus = new Bus.Builder()
