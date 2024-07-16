@@ -44,4 +44,12 @@ public class SelectionFormLogica {
             System.out.println(ex.getMessage());
         }
     }
+
+    public Object getOrigen() {
+        return origen;
+    }
+
+    public Object getDestino() {
+        return destino;
+    }
 }

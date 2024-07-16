@@ -15,6 +15,7 @@ public class Pasaje {
     private String horaSalida;
     private String precio;
     private int asiento;
+    private String tipoAsiento;
 
     public Pasaje(Builder builder) {
         this.origen = builder.origen;
@@ -23,6 +24,7 @@ public class Pasaje {
         this.horaSalida = builder.horaSalida;
         this.precio = builder.precio;
         this.asiento = Integer.parseInt(builder.asiento);
+        this.tipoAsiento = builder.tipoAsiento;
 
         System.out.println("      BUSES BIO-BIO        \n\n");
         System.out.println("Origen: "+ origen + "\n");
@@ -81,6 +83,7 @@ public class Pasaje {
         private String horaSalida;
         private String precio;
         private String asiento;
+        private String tipoAsiento;
 
 
         public Pasaje.Builder origen(Comunas origen){
@@ -110,6 +113,11 @@ public class Pasaje {
 
         public Pasaje.Builder asiento(String asiento) {
             this.asiento = asiento;
+            return this;
+        }
+
+        public Pasaje.Builder tipoAsiento(String tipoAsiento){
+            this.tipoAsiento = tipoAsiento;
             return this;
         }
 

@@ -4,8 +4,8 @@
 Origen: CONCEPCION
 Destino: NACIMIENTO
 
-Fecha Viaje: 25/7/2024
-Hora Viaje: 12:00
-Asiento: 36
+Fecha Viaje: 17/7/2024
+Hora Viaje: 13:00
+Asiento: 6
 
-Valor Pasaje: $7.000
+Valor Pasaje: $8.000

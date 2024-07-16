@@ -13,6 +13,7 @@ public class Bus {
     private Date fecha;
     private String horaSalida;
     private String precio;
+    private String tipoAsiento;
     private int floor;
     private int rows;
     private JTable table;
@@ -30,6 +31,7 @@ public class Bus {
         this.fecha = builder.fecha;
         this.horaSalida = builder.horaSalida;
         this.precio = builder.precio;
+        this.tipoAsiento = builder.tipoAsiento;
         this.floor = builder.floor;
         this.rows = builder.rows;
         this.table = builder.table;
@@ -85,6 +87,7 @@ public class Bus {
                                 .horaSalida(horaSalida)
                                 .precio(precio)
                                 .numeroAsiento(button.getText())
+                                .tipoAsiento(tipoAsiento)
                                 .build();
                     }
                 }
@@ -117,6 +120,7 @@ public class Bus {
         private Date fecha;
         private String horaSalida;
         private String precio;
+        private String tipoAsiento;
         private int floor;
         private int rows;
         private JTable table;
@@ -143,6 +147,11 @@ public class Bus {
 
         public Bus.Builder precio(String precio){
             this.precio = precio;
+            return this;
+        }
+
+        public Bus.Builder tipoAsiento(String tipoAsiento){
+            this.tipoAsiento = tipoAsiento;
             return this;
         }
 

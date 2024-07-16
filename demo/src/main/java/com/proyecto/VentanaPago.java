@@ -16,6 +16,7 @@ public class VentanaPago extends JFrame {
     private String horaSalida;
     private String precio;
     private String numeroAsiento;
+    private String tipoAsiento;
 
     public VentanaPago(Builder builder) {
         this.origen = builder.origen;
@@ -24,6 +25,7 @@ public class VentanaPago extends JFrame {
         this.horaSalida = builder.horaSalida;
         this.precio = builder.precio;
         this.numeroAsiento = builder.numeroAsiento;
+        this.tipoAsiento = builder.tipoAsiento;
         // Configura la ventana
         setTitle("Ventana de Pago");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,6 +55,7 @@ public class VentanaPago extends JFrame {
                         .horaSalida(horaSalida)
                         .precio(precio)
                         .asiento(numeroAsiento)
+                        .tipoAsiento(tipoAsiento)
                         .build();
             }
         });
@@ -64,6 +67,7 @@ public class VentanaPago extends JFrame {
         private String horaSalida;
         private String precio;
         private String numeroAsiento;
+        private String tipoAsiento;
 
         public VentanaPago.Builder origen(Comunas origen){
             this.origen = origen;
@@ -92,6 +96,11 @@ public class VentanaPago extends JFrame {
 
         public VentanaPago.Builder numeroAsiento(String numeroAsiento){
             this.numeroAsiento = numeroAsiento;
+            return this;
+        }
+
+        public VentanaPago.Builder tipoAsiento(String tipoAsiento){
+            this.tipoAsiento = tipoAsiento;
             return this;
         }
 
