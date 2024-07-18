@@ -1,5 +1,6 @@
 package com.logica;
 
+import com.builder.PasajeBuilder;
 import com.grafico.Comunas;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.colors.ColorConstants;
@@ -29,13 +30,13 @@ public class Pasaje {
     private int asiento;
     private String tipoAsiento;
 
-    public Pasaje(Builder builder) {
+    public Pasaje(PasajeBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
         this.horaSalida = builder.horaSalida;
         this.precio = builder.precio;
-        this.asiento = Integer.parseInt(builder.asiento);
+        this.asiento = Integer.parseInt(builder.numeroAsiento);
         this.tipoAsiento = builder.tipoAsiento;
 
         System.out.println("      BUSES BIO-BIO        \n\n");
@@ -171,56 +172,5 @@ public class Pasaje {
         double eightDigits = 10000000 + Math.random() * 90000000;
         String barcode = String.valueOf((int) eightDigits);
         return barcode;
-    }
-
-    public static class Builder{
-        private Comunas origen;
-        private Comunas destino;
-        private Date fecha;
-        private String horaSalida;
-        private String precio;
-        private String asiento;
-        private String tipoAsiento;
-
-
-        public Pasaje.Builder origen(Comunas origen){
-            this.origen = origen;
-            return this;
-        }
-
-        public Pasaje.Builder destino(Comunas destino) {
-            this.destino = destino;
-            return this;
-        }
-
-        public Pasaje.Builder fecha(Date fecha) {
-            this.fecha = fecha;
-            return this;
-        }
-
-        public Pasaje.Builder horaSalida(String horaSalida) {
-            this.horaSalida = horaSalida;
-            return this;
-        }
-
-        public Pasaje.Builder precio(String precio) {
-            this.precio = precio;
-            return this;
-        }
-
-        public Pasaje.Builder asiento(String asiento) {
-            this.asiento = asiento;
-            return this;
-        }
-
-        public Pasaje.Builder tipoAsiento(String tipoAsiento){
-            this.tipoAsiento = tipoAsiento;
-            return this;
-        }
-
-        public Pasaje build(){
-            return new Pasaje(this);
-        }
-
     }
 }

@@ -1,18 +1,21 @@
 package com.builder;
 
 import com.grafico.Comunas;
-import com.logica.PasajesHorariosLogica;
+import com.logica.Pasaje;
 
 import javax.swing.*;
 import java.util.Date;
 
-public class PasajesHorariosLogicaBuilder implements Builder{
-    public JTable ListaBuses;
+public class PasajeBuilder implements Builder{
     public Comunas origen;
     public Comunas destino;
     public Date fecha;
+    public String horaSalida;
+    public String precio;
+    public String numeroAsiento;
+    public String tipoAsiento;
 
-    private PasajesHorariosLogica pasajesHorariosLogica;
+    private Pasaje pasaje;
 
     @Override
     public Builder origen(Comunas origen) {
@@ -34,28 +37,31 @@ public class PasajesHorariosLogicaBuilder implements Builder{
 
     @Override
     public Builder horaSalida(String horaSalida) {
-        return null;
+        this.horaSalida = horaSalida;
+        return this;
     }
 
     @Override
     public Builder precio(String precio) {
-        return null;
+        this.precio = precio;
+        return this;
     }
 
     @Override
     public Builder numeroAsiento(String numeroAsiento) {
-        return null;
+        this.numeroAsiento = numeroAsiento;
+        return this;
     }
 
     @Override
     public Builder tipoAsiento(String tipoAsiento) {
-        return null;
+        this.tipoAsiento = tipoAsiento;
+        return this;
     }
 
     @Override
     public Builder listaBuses(JTable ListaBuses) {
-        this.ListaBuses = ListaBuses;
-        return this;
+        return null;
     }
 
     @Override
@@ -74,8 +80,8 @@ public class PasajesHorariosLogicaBuilder implements Builder{
     }
 
     @Override
-    public PasajesHorariosLogica build(){
-        this.pasajesHorariosLogica = new PasajesHorariosLogica(this);
-        return this.pasajesHorariosLogica;
+    public Object build() {
+        this.pasaje = new Pasaje(this);
+        return pasaje;
     }
 }

@@ -1,18 +1,23 @@
 package com.builder;
 
+import com.grafico.Bus;
 import com.grafico.Comunas;
-import com.logica.PasajesHorariosLogica;
 
 import javax.swing.*;
 import java.util.Date;
 
-public class PasajesHorariosLogicaBuilder implements Builder{
-    public JTable ListaBuses;
+public class BusBuilder implements Builder{
     public Comunas origen;
     public Comunas destino;
     public Date fecha;
+    public String horaSalida;
+    public String precio;
+    public String tipoAsiento;
+    public int floor;
+    public int rows;
+    public JTable table;
 
-    private PasajesHorariosLogica pasajesHorariosLogica;
+    private Bus bus;
 
     @Override
     public Builder origen(Comunas origen) {
@@ -34,12 +39,14 @@ public class PasajesHorariosLogicaBuilder implements Builder{
 
     @Override
     public Builder horaSalida(String horaSalida) {
-        return null;
+        this.horaSalida = horaSalida;
+        return this;
     }
 
     @Override
     public Builder precio(String precio) {
-        return null;
+        this.precio = precio;
+        return this;
     }
 
     @Override
@@ -49,33 +56,36 @@ public class PasajesHorariosLogicaBuilder implements Builder{
 
     @Override
     public Builder tipoAsiento(String tipoAsiento) {
-        return null;
-    }
-
-    @Override
-    public Builder listaBuses(JTable ListaBuses) {
-        this.ListaBuses = ListaBuses;
+        this.tipoAsiento = tipoAsiento;
         return this;
     }
 
     @Override
-    public Builder floor(int floor) {
+    public Builder listaBuses(JTable ListaBuses) {
         return null;
+    }
+
+    @Override
+    public Builder floor(int floor) {
+        this.floor = floor;
+        return this;
     }
 
     @Override
     public Builder rows(int rows) {
-        return null;
+        this.rows = rows;
+        return this;
     }
 
     @Override
     public Builder table(JTable table) {
-        return null;
+        this.table = table;
+        return this;
     }
 
     @Override
-    public PasajesHorariosLogica build(){
-        this.pasajesHorariosLogica = new PasajesHorariosLogica(this);
-        return this.pasajesHorariosLogica;
+    public Object build() {
+        this.bus = new Bus(this);
+        return this.bus ;
     }
 }

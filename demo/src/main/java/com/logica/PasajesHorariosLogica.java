@@ -1,5 +1,6 @@
 package com.logica;
 
+import com.builder.BusBuilder;
 import com.builder.PasajesHorariosLogicaBuilder;
 import com.grafico.Bus;
 import com.grafico.Comunas;
@@ -27,8 +28,8 @@ public class PasajesHorariosLogica {
         }
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
-            Bus bus = new Bus.Builder()
-            .origen(origen)
+            Bus bus = (Bus) new BusBuilder()
+                    .origen(origen)
             .destino(destino)
             .fecha(fecha)
             .horaSalida(getHorarioSalidaSeleccionado(i))

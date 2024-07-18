@@ -1,6 +1,9 @@
 package com.grafico;
+import com.builder.PasajeBuilder;
+import com.builder.VentanaPagoBuilder;
 import com.logica.Pasaje;
 
+import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -19,7 +22,7 @@ public class VentanaPago extends JFrame {
     private String numeroAsiento;
     private String tipoAsiento;
 
-    public VentanaPago(Builder builder) {
+    public VentanaPago(VentanaPagoBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -49,68 +52,18 @@ public class VentanaPago extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 //Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
-                Pasaje pasaje = new Pasaje.Builder()
+                Pasaje pasaje = (Pasaje) new PasajeBuilder()
                         .origen(origen)
                         .destino(destino)
                         .fecha(fecha)
                         .horaSalida(horaSalida)
                         .precio(precio)
-                        .asiento(numeroAsiento)
+                        .numeroAsiento(numeroAsiento)
                         .tipoAsiento(tipoAsiento)
                         .build();
             }
         });
-    }
-    public static class Builder{
-        private Comunas origen;
-        private Comunas destino;
-        private Date fecha;
-        private String horaSalida;
-        private String precio;
-        private String numeroAsiento;
-        private String tipoAsiento;
-
-        public VentanaPago.Builder origen(Comunas origen){
-            this.origen = origen;
-            return  this;
-        }
-
-        public VentanaPago.Builder destino(Comunas destino){
-            this.destino = destino;
-            return this;
-        }
-
-        public VentanaPago.Builder fecha(Date fecha){
-            this.fecha = fecha;
-            return this;
-        }
-
-        public VentanaPago.Builder horaSalida(String horaSalida){
-            this.horaSalida = horaSalida;
-            return this;
-        }
-
-        public VentanaPago.Builder precio(String precio){
-            this.precio = precio;
-            return this;
-        }
-
-        public VentanaPago.Builder numeroAsiento(String numeroAsiento){
-            this.numeroAsiento = numeroAsiento;
-            return this;
-        }
-
-        public VentanaPago.Builder tipoAsiento(String tipoAsiento){
-            this.tipoAsiento = tipoAsiento;
-            return this;
-        }
-
-        public VentanaPago build(){
-            return new VentanaPago(this);
-        }
-    }
-
-    /**
+    }/**
      * Método necesario para inicializar los componentes del formulario.
      * IntelliJ IDEA genera y llama a este método automáticamente en tiempo de compilación.
      * No es necesario escribirlo manualmente, pero es crucial llamarlo en el constructor.

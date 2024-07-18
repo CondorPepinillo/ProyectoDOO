@@ -1,5 +1,7 @@
 package com.grafico;
 
+import com.builder.BusBuilder;
+import com.builder.VentanaPagoBuilder;
 import com.logica.BusLogica;
 
 import javax.swing.*;
@@ -27,7 +29,7 @@ public class Bus {
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus(Builder builder) {
+    public Bus(BusBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -81,17 +83,16 @@ public class Bus {
                         //ABIR SIGUIENTE VENTANA
                         BusLogica busLogica = new BusLogica(rows, table);
                         busLogica.restarAsiento();
-                        //new VentanaPago(origen, destino, fecha, horaSalida, precio, button.getText());
-                        new VentanaPago.Builder()
-                                .origen(origen)
-                                .destino(destino)
-                                .fecha(fecha)
-                                .horaSalida(horaSalida)
-                                .precio(precio)
-                                .numeroAsiento(button.getText())
-                                .tipoAsiento(tipoAsiento)
-                                .build();
-
+                        //new VentanaPago(origen, destino, fecha, horaSalida, tipoAsiento, precio, button.getText());
+                                new VentanaPagoBuilder()
+                                        .origen(origen)
+                                        .destino(destino)
+                                        .fecha(fecha)
+                                        .horaSalida(horaSalida)
+                                        .tipoAsiento(tipoAsiento)
+                                        .precio(precio)
+                                        .numeroAsiento(button.getText())
+                                        .build();
                     }
                 }
             });
@@ -115,67 +116,6 @@ public class Bus {
     public void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-    }
-
-    public static class Builder{
-        private Comunas origen;
-        private Comunas destino;
-        private Date fecha;
-        private String horaSalida;
-        private String precio;
-        private String tipoAsiento;
-        private int floor;
-        private int rows;
-        private JTable table;
-
-        public Bus.Builder origen(Comunas origen){
-            this.origen = origen;
-            return this;
-        }
-
-        public Bus.Builder destino(Comunas destino){
-            this.destino = destino;
-            return this;
-        }
-
-        public Bus.Builder fecha(Date fecha){
-            this.fecha = fecha;
-            return this;
-        }
-
-        public Bus.Builder horaSalida(String horaSalida){
-            this.horaSalida = horaSalida;
-            return this;
-        }
-
-        public Bus.Builder precio(String precio){
-            this.precio = precio;
-            return this;
-        }
-
-        public Bus.Builder tipoAsiento(String tipoAsiento){
-            this.tipoAsiento = tipoAsiento;
-            return this;
-        }
-
-        public Bus.Builder floor(int floor){
-            this.floor = floor;
-            return this;
-        }
-
-        public Bus.Builder rows(int rows){
-            this.rows = rows;
-            return this;
-        }
-
-        public Bus.Builder table(JTable table){
-            this.table = table;
-            return this;
-        }
-
-        public Bus build(){
-            return new Bus(this);
-        }
     }
 }
 
