@@ -2,12 +2,12 @@ package com.logica;
 
 import javax.swing.*;
 
-public class BusLogica {
+public class BusClass {
     private JTable ListaBuses;
     private int rows;
 
     // Constructor modificado para aceptar JTable si no estaba previamente incluido
-    public BusLogica(int rows, JTable ListaBuses) {
+    public BusClass(int rows, JTable ListaBuses) {
         this.ListaBuses = ListaBuses;
         this.rows = rows;
     }

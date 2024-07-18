@@ -1,7 +1,7 @@
 package com.logica;
 
 import com.builder.PasajeBuilder;
-import com.grafico.Comunas;
+import com.grafico.ComunasEnum;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;
@@ -21,16 +21,16 @@ import java.util.Date;
 /**
  *Clase Pasaje, se encarga de escribir tu pasaje tanto en consola como en un archivo txt
  */
-public class Pasaje {
-    private Comunas origen;
-    private Comunas destino;
+public class PasajeClass {
+    private ComunasEnum origen;
+    private ComunasEnum destino;
     private Date fecha;
     private String horaSalida;
     private String precio;
     private int asiento;
     private String tipoAsiento;
 
-    public Pasaje(PasajeBuilder builder) {
+    public PasajeClass(PasajeBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -63,11 +63,11 @@ public class Pasaje {
         return asiento;
     }
 
-    public Comunas getOrigen() {
+    public ComunasEnum getOrigen() {
         return origen;
     }
 
-    public Comunas getDestino() {
+    public ComunasEnum getDestino() {
         return destino;
     }
 

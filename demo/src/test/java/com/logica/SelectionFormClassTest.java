@@ -10,7 +10,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SelectionFormLogicaTest {
+public class SelectionFormClassTest {
 
     @Test
     public void testValidSelection() {             //Desconozco porque el test no puede leer los cvs

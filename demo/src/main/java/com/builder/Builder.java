@@ -1,17 +1,14 @@
 package com.builder;
 
-import com.grafico.Bus;
-import com.grafico.Comunas;
-import com.grafico.VentanaPago;
-import com.logica.PasajesHorariosLogica;
+import com.grafico.ComunasEnum;
 
 import javax.swing.*;
 import java.util.Date;
 
 public interface Builder {
-    public Builder origen(Comunas origen);
+    public Builder origen(ComunasEnum origen);
 
-    public Builder destino(Comunas destino);
+    public Builder destino(ComunasEnum destino);
 
     public Builder fecha(Date fecha);
 

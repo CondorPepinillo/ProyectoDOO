@@ -1,28 +1,27 @@
 package com.grafico;
 import com.builder.PasajeBuilder;
 import com.builder.VentanaPagoBuilder;
-import com.logica.Pasaje;
+import com.logica.PasajeClass;
 
-import javax.print.attribute.standard.OrientationRequested;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 
-public class VentanaPago extends JFrame {
+public class VentanaPagoUI extends JFrame {
     private JPanel panelPrincipal;
     private JButton descargarPasajeButton;
 
-    private Comunas origen;
-    private Comunas destino;
+    private ComunasEnum origen;
+    private ComunasEnum destino;
     private Date fecha;
     private String horaSalida;
     private String precio;
     private String numeroAsiento;
     private String tipoAsiento;
 
-    public VentanaPago(VentanaPagoBuilder builder) {
+    public VentanaPagoUI(VentanaPagoBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -52,7 +51,7 @@ public class VentanaPago extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 //Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
-                Pasaje pasaje = (Pasaje) new PasajeBuilder()
+                PasajeClass pasajeClass = (PasajeClass) new PasajeBuilder()
                         .origen(origen)
                         .destino(destino)
                         .fecha(fecha)

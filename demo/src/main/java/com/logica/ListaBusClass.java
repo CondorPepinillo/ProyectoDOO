@@ -1,20 +1,20 @@
 package com.logica;
-import com.grafico.Bus;
+import com.grafico.BusUI;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class ListaBusClass {
-    private ArrayList<Bus> ListaBusClass;
+    private ArrayList<BusUI> listaBusClassUIS;
     public ListaBusClass(Date fecha){
-        ListaBusClass = new ArrayList<>();
+        listaBusClassUIS = new ArrayList<>();
     }
-    void addBus(Bus bus){
-        ListaBusClass.add(bus);
+    void addBus(BusUI busUI){
+        listaBusClassUIS.add(busUI);
     }
 
-    Bus get(int row){
-        return ListaBusClass.get(row);
+    BusUI get(int row){
+        return listaBusClassUIS.get(row);
     }
 }
 

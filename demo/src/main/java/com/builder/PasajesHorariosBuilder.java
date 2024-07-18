@@ -1,27 +1,27 @@
 package com.builder;
 
-import com.grafico.Comunas;
-import com.logica.PasajesHorariosLogica;
+import com.grafico.ComunasEnum;
+import com.logica.PasajesHorariosClass;
 
 import javax.swing.*;
 import java.util.Date;
 
-public class PasajesHorariosLogicaBuilder implements Builder{
+public class PasajesHorariosBuilder implements Builder{
     public JTable ListaBuses;
-    public Comunas origen;
-    public Comunas destino;
+    public ComunasEnum origen;
+    public ComunasEnum destino;
     public Date fecha;
 
-    private PasajesHorariosLogica pasajesHorariosLogica;
+    private PasajesHorariosClass pasajesHorariosClass;
 
     @Override
-    public Builder origen(Comunas origen) {
+    public Builder origen(ComunasEnum origen) {
         this.origen = origen;
         return this;
     }
 
     @Override
-    public Builder destino(Comunas destino) {
+    public Builder destino(ComunasEnum destino) {
         this.destino = destino;
         return this;
     }
@@ -74,8 +74,8 @@ public class PasajesHorariosLogicaBuilder implements Builder{
     }
 
     @Override
-    public PasajesHorariosLogica build(){
-        this.pasajesHorariosLogica = new PasajesHorariosLogica(this);
-        return this.pasajesHorariosLogica;
+    public PasajesHorariosClass build(){
+        this.pasajesHorariosClass = new PasajesHorariosClass(this);
+        return this.pasajesHorariosClass;
     }
 }

@@ -1,30 +1,30 @@
 package com.builder;
 
-import com.grafico.Comunas;
-import com.grafico.VentanaPago;
+import com.grafico.ComunasEnum;
+import com.grafico.VentanaPagoUI;
 
 import javax.swing.*;
 import java.util.Date;
 
 public class VentanaPagoBuilder implements Builder{
-    public Comunas origen;
-    public Comunas destino;
+    public ComunasEnum origen;
+    public ComunasEnum destino;
     public Date fecha;
     public String horaSalida;
     public String precio;
     public String numeroAsiento;
     public String tipoAsiento;
 
-    private VentanaPago ventanaPago;
+    private VentanaPagoUI ventanaPagoUI;
 
     @Override
-    public Builder origen(Comunas origen) {
+    public Builder origen(ComunasEnum origen) {
         this.origen = origen;
         return this;
     }
 
     @Override
-    public Builder destino(Comunas destino) {
+    public Builder destino(ComunasEnum destino) {
         this.destino = destino;
         return this;
     }
@@ -80,8 +80,8 @@ public class VentanaPagoBuilder implements Builder{
     }
 
     @Override
-    public VentanaPago build() {
-        this.ventanaPago = new VentanaPago(this);
-        return this.ventanaPago;
+    public VentanaPagoUI build() {
+        this.ventanaPagoUI = new VentanaPagoUI(this);
+        return this.ventanaPagoUI;
     }
 }

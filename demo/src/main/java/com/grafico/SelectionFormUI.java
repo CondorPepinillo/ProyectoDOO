@@ -1,6 +1,6 @@
 package com.grafico;
 
-import com.logica.SelectionFormLogica;
+import com.logica.SelectionFormClass;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -11,10 +11,10 @@ import java.awt.event.MouseEvent;
 /**
  * Clase SelectionForm1, clase que se encarga de iniciar la ventana principal y de la seleccion de elementos del viaje siendo estos la comuna de origen, comuna de destino y fecha del viaje
  */
-public class SelectionForm1 extends JFrame {
+public class SelectionFormUI extends JFrame {
     private JPanel panelPrincipal;
-    private JComboBox<Comunas> origenComboBox1;
-    private JComboBox<Comunas> destinoComboBox1;
+    private JComboBox<ComunasEnum> origenComboBox1;
+    private JComboBox<ComunasEnum> destinoComboBox1;
     private JButton submit;
     private JPanel panel1;
     private JPanel labelTitulo;
@@ -25,7 +25,7 @@ public class SelectionForm1 extends JFrame {
 
     JDateChooser dateChooser = new JDateChooser();
 
-    public SelectionForm1() {
+    public SelectionFormUI() {
         /**
          * Se crea la ventana y sus elementos principales
          */
@@ -40,9 +40,9 @@ public class SelectionForm1 extends JFrame {
 
         panelFecha.add(dateChooser);
 
-        Comunas[] comunas = new Comunas[]{Comunas.CONCEPCION, Comunas.LOS_ANGELES, Comunas.NACIMIENTO};
+        ComunasEnum[] comunas = new ComunasEnum[]{ComunasEnum.CONCEPCION, ComunasEnum.LOS_ANGELES, ComunasEnum.NACIMIENTO};
 
-        for (Comunas comuna : comunas) {
+        for (ComunasEnum comuna : comunas) {
             origenComboBox1.addItem(comuna);
             destinoComboBox1.addItem(comuna);
         }
@@ -51,7 +51,7 @@ public class SelectionForm1 extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                new SelectionFormLogica(dateChooser, origenComboBox1, destinoComboBox1, frame);
+                new SelectionFormClass(dateChooser, origenComboBox1, destinoComboBox1, frame);
             }
         });
 

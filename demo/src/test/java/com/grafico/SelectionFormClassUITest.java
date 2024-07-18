@@ -10,14 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 
 
-class SelectionForm1Test {
+class SelectionFormClassUITest {
 
-    private SelectionForm1 selectionForm;
+    private SelectionFormUI selectionForm;
 
     @BeforeEach
     public void setUp() {
         SwingUtilities.invokeLater(() -> {
-            selectionForm = new SelectionForm1();
+            selectionForm = new SelectionFormUI();
         });
     }
 

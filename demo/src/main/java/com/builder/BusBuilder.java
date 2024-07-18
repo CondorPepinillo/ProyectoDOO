@@ -1,14 +1,14 @@
 package com.builder;
 
-import com.grafico.Bus;
-import com.grafico.Comunas;
+import com.grafico.BusUI;
+import com.grafico.ComunasEnum;
 
 import javax.swing.*;
 import java.util.Date;
 
 public class BusBuilder implements Builder{
-    public Comunas origen;
-    public Comunas destino;
+    public ComunasEnum origen;
+    public ComunasEnum destino;
     public Date fecha;
     public String horaSalida;
     public String precio;
@@ -17,16 +17,16 @@ public class BusBuilder implements Builder{
     public int rows;
     public JTable table;
 
-    private Bus bus;
+    private BusUI busUI;
 
     @Override
-    public Builder origen(Comunas origen) {
+    public Builder origen(ComunasEnum origen) {
         this.origen = origen;
         return this;
     }
 
     @Override
-    public Builder destino(Comunas destino) {
+    public Builder destino(ComunasEnum destino) {
         this.destino = destino;
         return this;
     }
@@ -85,7 +85,7 @@ public class BusBuilder implements Builder{
 
     @Override
     public Object build() {
-        this.bus = new Bus(this);
-        return this.bus ;
+        this.busUI = new BusUI(this);
+        return this.busUI;
     }
 }

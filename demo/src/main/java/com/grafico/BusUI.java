@@ -2,7 +2,7 @@ package com.grafico;
 
 import com.builder.BusBuilder;
 import com.builder.VentanaPagoBuilder;
-import com.logica.BusLogica;
+import com.logica.BusClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 
-public class Bus {
-    private Comunas origen;
-    private Comunas destino;
+public class BusUI {
+    private ComunasEnum origen;
+    private ComunasEnum destino;
     private Date fecha;
     private String horaSalida;
     private String precio;
@@ -29,7 +29,7 @@ public class Bus {
     /**
      Se crear un panel principal que luego se divide en otros dos paneles izquiedo y derecho, esto para dividir adecuadamete la pantalla
     **/
-    public Bus(BusBuilder builder) {
+    public BusUI(BusBuilder builder) {
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -81,8 +81,8 @@ public class Bus {
                         listaAsientos.set(finalI, 1);
                         button.setBackground(Color.RED);
                         //ABIR SIGUIENTE VENTANA
-                        BusLogica busLogica = new BusLogica(rows, table);
-                        busLogica.restarAsiento();
+                        BusClass busClass = new BusClass(rows, table);
+                        busClass.restarAsiento();
                         //new VentanaPago(origen, destino, fecha, horaSalida, tipoAsiento, precio, button.getText());
                                 new VentanaPagoBuilder()
                                         .origen(origen)

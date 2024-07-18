@@ -8,7 +8,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 
-public class PasajesHorariosLogicaTest {
+public class PasajesHorariosClassTest {
 
     private JTable mockListaBuses;
     private Comunas mockOrigen;

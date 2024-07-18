@@ -1,8 +1,8 @@
 package com.grafico;
 
-import com.builder.PasajesHorariosLogicaBuilder;
-import com.logica.Data;
-import com.logica.PasajesHorariosLogica;
+import com.builder.PasajesHorariosBuilder;
+import com.logica.DataClass;
+import com.logica.PasajesHorariosClass;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,13 +16,13 @@ import java.util.Date;
  * Esta clase se encarga de manejar la seleccion del viaje acorde de las preferencias del usurio o cliente, los viajes presentan diversos factores como la hora, el tipo de bus y el tipo de asiento
  */
 
-public class pasajesHorariosUI {
+public class PasajesHorariosUI {
     private JPanel panel1;
     private JPanel busesLabelsPanel;
     private JTable ListaBuses;
     private JScrollPane scrollPane;
-    private Comunas origen;
-    private Comunas destino;
+    private ComunasEnum origen;
+    private ComunasEnum destino;
     private Date fecha;
     String[] col;
     Object[][] data;
@@ -34,13 +34,13 @@ public class pasajesHorariosUI {
      * @param fecha el dia del viaje
      */
 
-    public pasajesHorariosUI(Comunas origin, Comunas destination, Date fecha){
+    public PasajesHorariosUI(ComunasEnum origin, ComunasEnum destination, Date fecha){
         this.origen = origin;
         this.destino = destination;
         this.fecha = fecha;
 
         JFrame frame = new JFrame("Panel Seleccion Bus");
-        Data datos = new Data(origen, destino);
+        DataClass datos = new DataClass(origen, destino);
         col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio", "Piso", "Tipo"};
         data = datos.getData();
 
@@ -53,7 +53,7 @@ public class pasajesHorariosUI {
 
         ListaBuses = new JTable(model);
         //PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
-        PasajesHorariosLogica pasajesHorariosLogica = (PasajesHorariosLogica) new PasajesHorariosLogicaBuilder()
+        PasajesHorariosClass pasajesHorariosClass = (PasajesHorariosClass) new PasajesHorariosBuilder()
                 .listaBuses(ListaBuses)
                 .origen(origen)
                 .destino(destino)
@@ -65,7 +65,7 @@ public class pasajesHorariosUI {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                pasajesHorariosLogica.mostrarBus(ListaBuses.getSelectedRow());
+                pasajesHorariosClass.mostrarBus(ListaBuses.getSelectedRow());
             }
         });
 

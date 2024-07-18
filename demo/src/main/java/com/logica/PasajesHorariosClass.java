@@ -1,23 +1,23 @@
 package com.logica;
 
 import com.builder.BusBuilder;
-import com.builder.PasajesHorariosLogicaBuilder;
-import com.grafico.Bus;
-import com.grafico.Comunas;
+import com.builder.PasajesHorariosBuilder;
+import com.grafico.BusUI;
+import com.grafico.ComunasEnum;
 
 import javax.swing.*;
 import java.util.Date;
 
 
-public class PasajesHorariosLogica {
+public class PasajesHorariosClass {
     private JTable ListaBuses;
-    private Comunas origen;
-    private Comunas destino;
+    private ComunasEnum origen;
+    private ComunasEnum destino;
     private Date fecha;
     private int rows;
     private ListaBusClass listaBusClass;
 
-    public  PasajesHorariosLogica(PasajesHorariosLogicaBuilder builder){
+    public PasajesHorariosClass(PasajesHorariosBuilder builder){
         this.ListaBuses = builder.ListaBuses;
         this.origen = builder.origen;
         this.destino = builder.destino;
@@ -28,7 +28,7 @@ public class PasajesHorariosLogica {
         }
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
-            Bus bus = (Bus) new BusBuilder()
+            BusUI busUI = (BusUI) new BusBuilder()
                     .origen(origen)
             .destino(destino)
             .fecha(fecha)
@@ -39,7 +39,7 @@ public class PasajesHorariosLogica {
             .rows(i)
                     .table(ListaBuses)
                     .build();
-            listaBusClass.addBus(bus);
+            listaBusClass.addBus(busUI);
         }
     }
     /**

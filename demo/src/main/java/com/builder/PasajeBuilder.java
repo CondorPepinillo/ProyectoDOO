@@ -1,30 +1,30 @@
 package com.builder;
 
-import com.grafico.Comunas;
-import com.logica.Pasaje;
+import com.grafico.ComunasEnum;
+import com.logica.PasajeClass;
 
 import javax.swing.*;
 import java.util.Date;
 
 public class PasajeBuilder implements Builder{
-    public Comunas origen;
-    public Comunas destino;
+    public ComunasEnum origen;
+    public ComunasEnum destino;
     public Date fecha;
     public String horaSalida;
     public String precio;
     public String numeroAsiento;
     public String tipoAsiento;
 
-    private Pasaje pasaje;
+    private PasajeClass pasajeClass;
 
     @Override
-    public Builder origen(Comunas origen) {
+    public Builder origen(ComunasEnum origen) {
         this.origen = origen;
         return this;
     }
 
     @Override
-    public Builder destino(Comunas destino) {
+    public Builder destino(ComunasEnum destino) {
         this.destino = destino;
         return this;
     }
@@ -81,7 +81,7 @@ public class PasajeBuilder implements Builder{
 
     @Override
     public Object build() {
-        this.pasaje = new Pasaje(this);
-        return pasaje;
+        this.pasajeClass = new PasajeClass(this);
+        return pasajeClass;
     }
 }

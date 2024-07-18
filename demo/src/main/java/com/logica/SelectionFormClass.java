@@ -5,11 +5,11 @@ import javax.swing.*;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SelectionFormLogica {
-    private Comunas origen;
-    private Comunas destino;
+public class SelectionFormClass {
+    private ComunasEnum origen;
+    private ComunasEnum destino;
 
-    public SelectionFormLogica(JDateChooser dateChooser, JComboBox<Comunas> origenComboBox1, JComboBox<Comunas> destinoComboBox1, JFrame frame) {
+    public SelectionFormClass(JDateChooser dateChooser, JComboBox<ComunasEnum> origenComboBox1, JComboBox<ComunasEnum> destinoComboBox1, JFrame frame) {
         Calendar fechaAux = Calendar.getInstance();
         fechaAux.add(Calendar.DAY_OF_MONTH, -1);
         Date fechaAux2 = fechaAux.getTime();
@@ -31,10 +31,10 @@ public class SelectionFormLogica {
                     origenComboBox1 != null && destinoComboBox1 != null &&
                     dateChooser.getDate().compareTo(fechaAux2) >= 0) {
 
-                origen = (Comunas) origenComboBox1.getSelectedItem();
-                destino = (Comunas) destinoComboBox1.getSelectedItem();
+                origen = (ComunasEnum) origenComboBox1.getSelectedItem();
+                destino = (ComunasEnum) destinoComboBox1.getSelectedItem();
 
-                pasajesHorariosUI ventanaSeleccion = new pasajesHorariosUI(origen, destino, dateChooser.getDate());
+                PasajesHorariosUI ventanaSeleccion = new PasajesHorariosUI(origen, destino, dateChooser.getDate());
                 frame.dispose();
             }
         } catch (IllegalArgumentException ex) {
