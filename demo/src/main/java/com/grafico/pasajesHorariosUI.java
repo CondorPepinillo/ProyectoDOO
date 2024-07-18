@@ -1,5 +1,6 @@
 package com.grafico;
 
+import com.builder.PasajesHorariosLogicaBuilder;
 import com.logica.Data;
 import com.logica.PasajesHorariosLogica;
 
@@ -52,10 +53,10 @@ public class pasajesHorariosUI {
 
         ListaBuses = new JTable(model);
         //PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
-        PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica.Builder()
-                .ListaBuses(ListaBuses)
+        PasajesHorariosLogica pasajesHorariosLogica = (PasajesHorariosLogica) new PasajesHorariosLogicaBuilder()
+                .listaBuses(ListaBuses)
                 .origen(origen)
-                .destino(destination)
+                .destino(destino)
                 .fecha(fecha)
                 .build();
 

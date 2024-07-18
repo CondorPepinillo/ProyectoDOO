@@ -1,5 +1,6 @@
 package com.logica;
 
+import com.builder.PasajesHorariosLogicaBuilder;
 import com.grafico.Bus;
 import com.grafico.Comunas;
 
@@ -15,7 +16,7 @@ public class PasajesHorariosLogica {
     private int rows;
     private ListaBusClass listaBusClass;
 
-    public  PasajesHorariosLogica(Builder builder){
+    public  PasajesHorariosLogica(PasajesHorariosLogicaBuilder builder){
         this.ListaBuses = builder.ListaBuses;
         this.origen = builder.origen;
         this.destino = builder.destino;
@@ -94,35 +95,4 @@ public class PasajesHorariosLogica {
         listaBusClass.get(row).mostrarBus();
     }
 
-    public static class Builder{
-        private JTable ListaBuses;
-        private Comunas origen;
-        private Comunas destino;
-        private Date fecha;
-
-
-        public PasajesHorariosLogica.Builder ListaBuses(JTable ListaBuses){
-            this.ListaBuses = ListaBuses;
-            return this;
-        }
-
-        public PasajesHorariosLogica.Builder origen(Comunas origen){
-            this.origen = origen;
-            return this;
-        }
-
-        public PasajesHorariosLogica.Builder destino(Comunas destino){
-            this.destino = destino;
-            return this;
-        }
-
-        public PasajesHorariosLogica.Builder fecha(Date fecha){
-            this.fecha = fecha;
-            return this;
-        }
-
-        public PasajesHorariosLogica build(){
-            return new PasajesHorariosLogica(this);
-        }
-    }
 }
