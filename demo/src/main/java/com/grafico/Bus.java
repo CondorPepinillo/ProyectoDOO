@@ -1,4 +1,6 @@
-package com.proyecto;
+package com.grafico;
+
+import com.logica.BusLogica;
 
 import javax.swing.*;
 import java.awt.*;
@@ -110,7 +112,7 @@ public class Bus {
         }
         frame.pack();
     }
-    void mostrarBus(){
+    public void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }

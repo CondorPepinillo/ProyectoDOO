@@ -1,4 +1,5 @@
-package com.proyecto;
+package com.logica;
+import com.grafico.Bus;
 
 import java.util.ArrayList;
 import java.util.Date;

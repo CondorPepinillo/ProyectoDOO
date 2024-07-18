@@ -1,4 +1,6 @@
-package com.proyecto;
+package com.logica;
+
+import com.grafico.Comunas;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +15,7 @@ public class Data{
         this.destino = destino;
     }
 
-    Object[][] getData(){
+    public Object[][] getData(){
         try{
             BufferedReader br = null;
             if (origen.equals(Comunas.CONCEPCION) && destino.equals(Comunas.LOS_ANGELES)){

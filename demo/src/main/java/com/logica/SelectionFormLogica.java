@@ -1,4 +1,5 @@
-package com.proyecto;
+package com.logica;
+import com.grafico.*;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 import java.util.Calendar;

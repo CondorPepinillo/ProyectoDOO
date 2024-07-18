@@ -1,4 +1,5 @@
-package com.proyecto;
+package com.grafico;
+import com.logica.Pasaje;
 
 import javax.swing.*;
 import java.awt.*;

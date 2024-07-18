@@ -1,4 +1,7 @@
-package com.proyecto;
+package com.grafico;
+
+import com.logica.Data;
+import com.logica.PasajesHorariosLogica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

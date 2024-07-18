@@ -1,4 +1,4 @@
-package com.proyecto;
+package com.grafico;
 
 import org.junit.jupiter.api.BeforeEach;
 

@@ -1,5 +1,6 @@
-package com.proyecto;
+package com.logica;
 
+import com.grafico.Comunas;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;

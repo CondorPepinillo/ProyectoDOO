@@ -1,4 +1,4 @@
-package com.proyecto;
+package com.logica;
 
 import javax.swing.*;
 

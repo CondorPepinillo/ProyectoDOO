@@ -1,4 +1,7 @@
-package com.proyecto;
+package com.logica;
+
+import com.grafico.Bus;
+import com.grafico.Comunas;
 
 import javax.swing.*;
 import java.util.Date;
