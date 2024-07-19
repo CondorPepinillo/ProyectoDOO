@@ -129,5 +129,9 @@ public class BusUI {
     public int getRows() {
         return rows;
     }
-}
 
+
+    public String getHoraSalida() { //usado para test
+        return horaSalida;
+    }
+}

@@ -54,4 +54,8 @@ public class PasajesHorariosClass implements SelectionObserver{
         }
         listaBusClass.get(rowIndex).mostrarBus();
     }
+
+    public ListaBusClass getListaBusClass() { //Usado para test
+        return listaBusClass;
+    }
 }
