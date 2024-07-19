@@ -18,7 +18,7 @@ import java.util.Date;
  * Esta clase se encarga de manejar la seleccion del viaje acorde de las preferencias del usurio o cliente, los viajes presentan diversos factores como la hora, el tipo de bus y el tipo de asiento
  */
 
-public class PasajesHorariosUI {
+public class PasajesHorariosUI extends SubjectClass {
     private JPanel panel1;
     private JPanel busesLabelsPanel;
     private JTable ListaBuses;
@@ -62,19 +62,30 @@ public class PasajesHorariosUI {
         ListaBuses = new JTable(model);
         //PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
         try {
+            DataClass dataClass = new DataClass(origen, destino);
             PasajesHorariosClass pasajesHorariosClass = (PasajesHorariosClass) new PasajesHorariosBuilder()
-                    .listaBuses(ListaBuses)
                     .origen(origen)
                     .destino(destino)
                     .fecha(fecha)
+                    .busData(dataClass)
+                    .pasajesHorariosUI(this)
                     .build();
+
+            addSelectionObserver(pasajesHorariosClass);
 
             ListaBuses.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
+                    int rowIndex = ListaBuses.getSelectedRow();
+                    if (rowIndex != -1) {
+                        try {
+                            notifySelectionObservers(rowIndex);
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                     System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                    pasajesHorariosClass.mostrarBus(ListaBuses.getSelectedRow());
                 }
             });
         } catch (IOException | IllegalArgumentException e) {
@@ -90,4 +101,15 @@ public class PasajesHorariosUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
+    public void actualizarAsientos(int rows){
+        int numeroAsientos = Integer.parseInt(ListaBuses.getValueAt(rows, 4).toString());
+        numeroAsientos--;
+        ListaBuses.setValueAt(numeroAsientos, rows, 4);
+    }
+
+    public JTable getTable(){
+        return ListaBuses;
+    }
+
 }

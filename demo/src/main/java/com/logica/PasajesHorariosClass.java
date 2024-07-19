@@ -3,95 +3,52 @@ package com.logica;
 import com.builder.BusBuilder;
 import com.builder.PasajesHorariosBuilder;
 import com.grafico.BusUI;
+import com.grafico.PasajesHorariosUI;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Date;
 
 
-public class PasajesHorariosClass {
-    private JTable ListaBuses;
+public class PasajesHorariosClass implements SelectionObserver{
+    private Object[][] busData;
     private ComunasEnum origen;
     private ComunasEnum destino;
     private Date fecha;
-    private int rows;
     private ListaBusClass listaBusClass;
+    private PasajesHorariosUI pasajesHorariosUI;
 
     public PasajesHorariosClass(PasajesHorariosBuilder builder) throws IOException {
-        this.ListaBuses = builder.ListaBuses;
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
-        rows = ListaBuses.getRowCount();
-        if(rows <= 0){
-            throw new IllegalArgumentException("NO puede ser 0 o menor");
+        this.busData = builder.dataClass.getData();
+        this.pasajesHorariosUI = builder.pasajesHorariosUI;
+
+        if(busData.length <= 0){
+            throw new IllegalArgumentException("No hay datos disponibles para los buses seleccionados.");
         }
+
+    }
+
+    @Override
+    public void update(int rowIndex) throws IOException {
         listaBusClass = new ListaBusClass(fecha);
-        for(int i = 0; i < rows; i++){
+        for(int i = 0; i < busData.length; i++){
+
             BusUI busUI = (BusUI) new BusBuilder()
                     .origen(origen)
-            .destino(destino)
-            .fecha(fecha)
-            .horaSalida(getHorarioSalidaSeleccionado(i))
-            .precio(getPrecio(i))
-                    .tipoAsiento(getTipoAsiento(i))
-            .floor(getPiso(i))
-            .rows(i)
-                    .table(ListaBuses)
+                    .destino(destino)
+                    .fecha(fecha)
+                    .horaSalida((String) busData[i][1])
+                    .precio((String) busData[i][5])
+                    .tipoAsiento((String) busData[i][7])
+                    .floor(Integer.parseInt((String) busData[i][6]))
+                    .rows(i)
+                    .pasajesHorariosUI(pasajesHorariosUI)
                     .build();
             listaBusClass.addBus(busUI);
-        }
-    }
-    /**
-     *
-     * @return Horirio, retorna el elemento horario de la fila clickiada castiado en String
-     */
-    public String getHorarioSalidaSeleccionado(int i) {
-        int selectedRow = i;
-        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
-            return (String) ListaBuses.getValueAt(selectedRow, 1);
-        } else {
-            throw new IllegalArgumentException("No se selecciono fila");
-        }
-    }
 
-    /**
-     *
-     * @return  Precio, retorna el elemento precio de la fila clickiada castiado en String
-     */
-    public String getPrecio(int i) {
-        int selectedRow = i;
-        if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
-            return (String) ListaBuses.getValueAt(selectedRow, 5);
-        } else {
-            throw new IllegalArgumentException("No se selecciono fila");
         }
+        listaBusClass.get(rowIndex).mostrarBus();
     }
-    /**
-     *
-     * @return  Piso, retorna el piso del bus en el que se viaja (piso 1 o piso 2) castiado en String
-     */
-    public int getPiso(int i) {
-        int selectedRow = i;
-        if (selectedRow != -1) {
-            String pisoStr = (String) ListaBuses.getValueAt(selectedRow, 6);
-            return Integer.parseInt(pisoStr);
-        } else {
-            return -1;
-        }
-    }
-
-    public String getTipoAsiento(int i){
-        int selectedRow = i;
-        if (selectedRow != -1) {
-            return (String) ListaBuses.getValueAt(selectedRow, 7);
-        } else {
-            return null;
-        }
-    }
-
-    public void mostrarBus(int row){
-        listaBusClass.get(row).mostrarBus();
-    }
-
 }

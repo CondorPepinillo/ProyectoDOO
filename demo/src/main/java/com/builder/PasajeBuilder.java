@@ -1,6 +1,8 @@
 package com.builder;
 
+import com.grafico.PasajesHorariosUI;
 import com.logica.ComunasEnum;
+import com.logica.DataClass;
 import com.logica.PasajeClass;
 
 import javax.swing.*;
@@ -15,7 +17,6 @@ public class PasajeBuilder implements Builder{
     public String precio;
     public String numeroAsiento;
     public String tipoAsiento;
-
     private PasajeClass pasajeClass;
 
     @Override
@@ -79,6 +80,17 @@ public class PasajeBuilder implements Builder{
     public Builder table(JTable table) {
         return null;
     }
+
+    @Override
+    public Builder busData(DataClass dataClass) {
+        return null;
+    }
+
+    @Override
+    public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI) {
+        return null;
+    }
+
 
     @Override
     public Object build() throws IOException {

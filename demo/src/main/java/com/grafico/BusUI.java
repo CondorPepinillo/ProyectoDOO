@@ -2,8 +2,9 @@ package com.grafico;
 
 import com.builder.BusBuilder;
 import com.builder.VentanaPagoBuilder;
-import com.logica.BusClass;
 import com.logica.ComunasEnum;
+import com.logica.PasajesHorariosClass;
+import com.logica.SelectionObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class BusUI {
     private String tipoAsiento;
     private int floor;
     private int rows;
-    private JTable table;
+    private PasajesHorariosUI pasajesHorariosUI;
 
     private ArrayList<Integer> listaAsientos = new ArrayList<>();
     private ArrayList<JButton> botonesAsientos = new ArrayList<>(); // ArrayList para almacenar los botones
@@ -40,7 +41,7 @@ public class BusUI {
         this.tipoAsiento = builder.tipoAsiento;
         this.floor = builder.floor;
         this.rows = builder.rows;
-        this.table = builder.table;
+        this.pasajesHorariosUI = builder.pasajesHorariosUI;
 
         int seats = floor == 1 ? 20 : 40;
         frame = new JFrame("Panel Principal");
@@ -84,8 +85,7 @@ public class BusUI {
                             listaAsientos.set(finalI, 1);
                             button.setBackground(Color.RED);
                             //ABIR SIGUIENTE VENTANA
-                            BusClass busClass = new BusClass(rows, table);
-                            busClass.restarAsiento();
+                            pasajesHorariosUI.actualizarAsientos(rows);
                             //new VentanaPago(origen, destino, fecha, horaSalida, tipoAsiento, precio, button.getText());
                             new VentanaPagoBuilder()
                                     .origen(origen)
@@ -119,6 +119,7 @@ public class BusUI {
         }
         frame.pack();
     }
+
     public void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);

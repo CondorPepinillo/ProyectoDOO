@@ -1,6 +1,9 @@
 package com.builder;
 
+import com.grafico.PasajesHorariosUI;
 import com.logica.ComunasEnum;
+import com.logica.DataClass;
+import com.logica.PasajesHorariosClass;
 
 import javax.swing.*;
 import java.io.*;
@@ -28,6 +31,10 @@ public interface Builder {
     public Builder rows(int rows);
 
     public Builder table(JTable table);
+
+    public Builder busData(DataClass dataClass);
+
+    public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI);
 
     public Object build() throws IOException, FileNotFoundException;
 }

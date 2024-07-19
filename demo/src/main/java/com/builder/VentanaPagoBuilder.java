@@ -1,7 +1,9 @@
 package com.builder;
 
+import com.grafico.PasajesHorariosUI;
 import com.logica.ComunasEnum;
 import com.grafico.VentanaPagoUI;
+import com.logica.DataClass;
 
 import javax.swing.*;
 import java.util.Date;
@@ -78,6 +80,17 @@ public class VentanaPagoBuilder implements Builder{
     public Builder table(JTable table) {
         return null;
     }
+
+    @Override
+    public Builder busData(DataClass dataClass) {
+        return null;
+    }
+
+    @Override
+    public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI) {
+        return null;
+    }
+
 
     @Override
     public VentanaPagoUI build() {

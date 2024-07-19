@@ -1,7 +1,9 @@
 package com.builder;
 
 import com.grafico.BusUI;
+import com.grafico.PasajesHorariosUI;
 import com.logica.ComunasEnum;
+import com.logica.DataClass;
 
 import javax.swing.*;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class BusBuilder implements Builder{
     public JTable table;
 
     private BusUI busUI;
+    public PasajesHorariosUI pasajesHorariosUI;
 
     @Override
     public Builder origen(ComunasEnum origen) {
@@ -79,7 +82,17 @@ public class BusBuilder implements Builder{
 
     @Override
     public Builder table(JTable table) {
-        this.table = table;
+        return null;
+    }
+
+    @Override
+    public Builder busData(DataClass dataClass) {
+        return null;
+    }
+
+    @Override
+    public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI) {
+        this.pasajesHorariosUI = pasajesHorariosUI;
         return this;
     }
 
