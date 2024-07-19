@@ -91,6 +91,11 @@ public class VentanaPagoBuilder implements Builder{
         return null;
     }
 
+    @Override
+    public Builder seats(int seats) {
+        return null;
+    }
+
 
     @Override
     public VentanaPagoUI build() {

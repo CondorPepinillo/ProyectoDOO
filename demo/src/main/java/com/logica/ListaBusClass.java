@@ -16,5 +16,14 @@ public class ListaBusClass {
     BusUI get(int row){
         return listaBusClassUIS.get(row);
     }
+
+    public boolean exists(int row) {
+        for (BusUI busUI : listaBusClassUIS) {
+            if (busUI.getRows() == row) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

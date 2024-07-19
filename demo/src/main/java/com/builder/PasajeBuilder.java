@@ -91,6 +91,11 @@ public class PasajeBuilder implements Builder{
         return null;
     }
 
+    @Override
+    public Builder seats(int seats) {
+        return null;
+    }
+
 
     @Override
     public Object build() throws IOException {

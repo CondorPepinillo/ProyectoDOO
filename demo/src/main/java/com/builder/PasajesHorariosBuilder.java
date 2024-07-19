@@ -88,6 +88,11 @@ public class PasajesHorariosBuilder implements Builder{
         return this;
     }
 
+    @Override
+    public Builder seats(int seats) {
+        return null;
+    }
+
 
     @Override
     public PasajesHorariosClass build() throws IOException {

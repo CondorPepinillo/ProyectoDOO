@@ -36,6 +36,8 @@ public interface Builder {
 
     public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI);
 
+    public Builder seats(int seats);
+
     public Object build() throws IOException, FileNotFoundException;
 }
 

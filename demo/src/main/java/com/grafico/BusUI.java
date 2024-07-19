@@ -23,6 +23,7 @@ public class BusUI {
     private String tipoAsiento;
     private int floor;
     private int rows;
+    private int seats;
     private PasajesHorariosUI pasajesHorariosUI;
 
     private ArrayList<Integer> listaAsientos = new ArrayList<>();
@@ -41,14 +42,14 @@ public class BusUI {
         this.tipoAsiento = builder.tipoAsiento;
         this.floor = builder.floor;
         this.rows = builder.rows;
+        this.seats = builder.seats;
         this.pasajesHorariosUI = builder.pasajesHorariosUI;
 
-        int seats = floor == 1 ? 20 : 40;
         frame = new JFrame("Panel Principal");
         JPanel panel1 = new JPanel();
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
-        GridLayout layoutButtons = new GridLayout(seats/4, 2);
+        GridLayout layoutButtons = new GridLayout(this.seats/4, 2);
         BorderLayout borderLayout = new BorderLayout();
         panel1.setLayout(borderLayout);
         JLabel floorLabel = new JLabel(floor == 1 ? "Piso 1" : "Piso 2", SwingConstants.CENTER);
@@ -62,7 +63,7 @@ public class BusUI {
             listaAsientos.add(0);
         }
 
-        int startLabel = seats == 20 ? 1 : 21;
+        int startLabel = floor == 1 ? 1 : 21;
 
         for (int i = 0; i < seats; i++) {
             int labelNumber = startLabel + i;
@@ -111,7 +112,7 @@ public class BusUI {
         }
 
         frame.getContentPane().add(panel1);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         if (seats <= 20) {
             frame.setPreferredSize(new Dimension(250, 200));
         } else {
@@ -123,6 +124,10 @@ public class BusUI {
     public void mostrarBus(){
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+    }
+
+    public int getRows() {
+        return rows;
     }
 }
 

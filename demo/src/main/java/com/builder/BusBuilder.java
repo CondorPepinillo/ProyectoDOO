@@ -18,6 +18,7 @@ public class BusBuilder implements Builder{
     public int floor;
     public int rows;
     public JTable table;
+    public int seats;
 
     private BusUI busUI;
     public PasajesHorariosUI pasajesHorariosUI;
@@ -93,6 +94,12 @@ public class BusBuilder implements Builder{
     @Override
     public Builder pasajesHorariosUI(PasajesHorariosUI pasajesHorariosUI) {
         this.pasajesHorariosUI = pasajesHorariosUI;
+        return this;
+    }
+
+    @Override
+    public Builder seats(int seats) {
+        this.seats = seats;
         return this;
     }
 

@@ -32,22 +32,25 @@ public class PasajesHorariosClass implements SelectionObserver{
 
     @Override
     public void update(int rowIndex) throws IOException {
-        listaBusClass = new ListaBusClass(fecha);
-        for(int i = 0; i < busData.length; i++){
-
-            BusUI busUI = (BusUI) new BusBuilder()
-                    .origen(origen)
-                    .destino(destino)
-                    .fecha(fecha)
-                    .horaSalida((String) busData[i][1])
-                    .precio((String) busData[i][5])
-                    .tipoAsiento((String) busData[i][7])
-                    .floor(Integer.parseInt((String) busData[i][6]))
-                    .rows(i)
-                    .pasajesHorariosUI(pasajesHorariosUI)
-                    .build();
-            listaBusClass.addBus(busUI);
-
+        if (listaBusClass == null) {
+            listaBusClass = new ListaBusClass(fecha);
+        }
+        if (!listaBusClass.exists(rowIndex)) {
+            for(int i = 0; i < busData.length; i++){
+                BusUI busUI = (BusUI) new BusBuilder()
+                        .origen(origen)
+                        .destino(destino)
+                        .fecha(fecha)
+                        .horaSalida((String) busData[i][1])
+                        .precio((String) busData[i][5])
+                        .tipoAsiento((String) busData[i][7])
+                        .floor(Integer.parseInt((String) busData[i][6]))
+                        .rows(i)
+                        .pasajesHorariosUI(pasajesHorariosUI)
+                        .seats(Integer.parseInt((String) busData[i][4]))
+                        .build();
+                listaBusClass.addBus(busUI);
+            }
         }
         listaBusClass.get(rowIndex).mostrarBus();
     }
