@@ -6,6 +6,8 @@ import com.logica.BusClass;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -73,26 +75,30 @@ public class BusUI {
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if(listaAsientos.get(finalI) != 0){
-                        System.out.println("Asiento " + button.getText() + " ya  esta ocupado");
-                    }
-                    else{
-                        System.out.println("Botón " + button.getText() + " clickeado.");
-                        listaAsientos.set(finalI, 1);
-                        button.setBackground(Color.RED);
-                        //ABIR SIGUIENTE VENTANA
-                        BusClass busClass = new BusClass(rows, table);
-                        busClass.restarAsiento();
-                        //new VentanaPago(origen, destino, fecha, horaSalida, tipoAsiento, precio, button.getText());
-                                new VentanaPagoBuilder()
-                                        .origen(origen)
-                                        .destino(destino)
-                                        .fecha(fecha)
-                                        .horaSalida(horaSalida)
-                                        .tipoAsiento(tipoAsiento)
-                                        .precio(precio)
-                                        .numeroAsiento(button.getText())
-                                        .build();
+                    try {
+                        if(listaAsientos.get(finalI) != 0){
+                            System.out.println("Asiento " + button.getText() + " ya  está ocupado");
+                            throw new IllegalArgumentException("Asiento " + button.getText() + " ya está ocupado");
+                        } else{
+                            System.out.println("Botón " + button.getText() + " clickeado.");
+                            listaAsientos.set(finalI, 1);
+                            button.setBackground(Color.RED);
+                            //ABIR SIGUIENTE VENTANA
+                            BusClass busClass = new BusClass(rows, table);
+                            busClass.restarAsiento();
+                            //new VentanaPago(origen, destino, fecha, horaSalida, tipoAsiento, precio, button.getText());
+                            new VentanaPagoBuilder()
+                                    .origen(origen)
+                                    .destino(destino)
+                                    .fecha(fecha)
+                                    .horaSalida(horaSalida)
+                                    .tipoAsiento(tipoAsiento)
+                                    .precio(precio)
+                                    .numeroAsiento(button.getText())
+                                    .build();
+                        }
+                    } catch (IllegalArgumentException | IOException ex) {
+                        JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });

@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 public class VentanaPagoUI extends JFrame {
@@ -51,15 +53,19 @@ public class VentanaPagoUI extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 //Pasaje pasaje = new Pasaje(origen, destino, fecha, horaSalida, precio, numeroAsiento);
-                PasajeClass pasajeClass = (PasajeClass) new PasajeBuilder()
-                        .origen(origen)
-                        .destino(destino)
-                        .fecha(fecha)
-                        .horaSalida(horaSalida)
-                        .precio(precio)
-                        .numeroAsiento(numeroAsiento)
-                        .tipoAsiento(tipoAsiento)
-                        .build();
+                try {
+                    PasajeClass pasajeClass = (PasajeClass) new PasajeBuilder()
+                            .origen(origen)
+                            .destino(destino)
+                            .fecha(fecha)
+                            .horaSalida(horaSalida)
+                            .precio(precio)
+                            .numeroAsiento(numeroAsiento)
+                            .tipoAsiento(tipoAsiento)
+                            .build();
+                } catch (IOException | IllegalArgumentException ex) {
+                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }/**

@@ -4,6 +4,7 @@ import com.grafico.ComunasEnum;
 import com.logica.PasajesHorariosClass;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.Date;
 
 public class PasajesHorariosBuilder implements Builder{
@@ -74,7 +75,7 @@ public class PasajesHorariosBuilder implements Builder{
     }
 
     @Override
-    public PasajesHorariosClass build(){
+    public PasajesHorariosClass build() throws IOException {
         this.pasajesHorariosClass = new PasajesHorariosClass(this);
         return this.pasajesHorariosClass;
     }

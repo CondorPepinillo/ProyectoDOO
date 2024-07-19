@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -34,15 +35,21 @@ public class PasajesHorariosUI {
      * @param fecha el dia del viaje
      */
 
-    public PasajesHorariosUI(ComunasEnum origin, ComunasEnum destination, Date fecha){
+    public PasajesHorariosUI(ComunasEnum origin, ComunasEnum destination, Date fecha) {
         this.origen = origin;
         this.destino = destination;
         this.fecha = fecha;
 
         JFrame frame = new JFrame("Panel Seleccion Bus");
-        DataClass datos = new DataClass(origen, destino);
         col = new String[]{"Empresa", "Salida", "Llegada", "Duracion", "Asientos", "Precio", "Piso", "Tipo"};
-        data = datos.getData();
+
+        try {
+            DataClass datos = new DataClass(origen, destino);
+            data = datos.getData();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage() + "Por favor reiniciar programa.", "Error", JOptionPane.ERROR_MESSAGE);
+            data = new Object[][]{};
+        }
 
         DefaultTableModel model = new DefaultTableModel(data, col) {
             @Override
@@ -53,21 +60,25 @@ public class PasajesHorariosUI {
 
         ListaBuses = new JTable(model);
         //PasajesHorariosLogica pasajesHorariosLogica = new PasajesHorariosLogica(ListaBuses, origen, destination, fecha);
-        PasajesHorariosClass pasajesHorariosClass = (PasajesHorariosClass) new PasajesHorariosBuilder()
-                .listaBuses(ListaBuses)
-                .origen(origen)
-                .destino(destino)
-                .fecha(fecha)
-                .build();
+        try {
+            PasajesHorariosClass pasajesHorariosClass = (PasajesHorariosClass) new PasajesHorariosBuilder()
+                    .listaBuses(ListaBuses)
+                    .origen(origen)
+                    .destino(destino)
+                    .fecha(fecha)
+                    .build();
 
-        ListaBuses.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.out.println("Click en row: " + ListaBuses.getSelectedRow());
-                pasajesHorariosClass.mostrarBus(ListaBuses.getSelectedRow());
-            }
-        });
+            ListaBuses.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    System.out.println("Click en row: " + ListaBuses.getSelectedRow());
+                    pasajesHorariosClass.mostrarBus(ListaBuses.getSelectedRow());
+                }
+            });
+        } catch (IOException | IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
         scrollPane = new JScrollPane(ListaBuses);
         frame.setLocationRelativeTo(null);

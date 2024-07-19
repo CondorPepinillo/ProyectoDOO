@@ -6,6 +6,7 @@ import com.grafico.BusUI;
 import com.grafico.ComunasEnum;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.Date;
 
 
@@ -17,14 +18,14 @@ public class PasajesHorariosClass {
     private int rows;
     private ListaBusClass listaBusClass;
 
-    public PasajesHorariosClass(PasajesHorariosBuilder builder){
+    public PasajesHorariosClass(PasajesHorariosBuilder builder) throws IOException {
         this.ListaBuses = builder.ListaBuses;
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
         rows = ListaBuses.getRowCount();
         if(rows <= 0){
-            System.err.println("NO puede ser 0 o menor");
+            throw new IllegalArgumentException("NO puede ser 0 o menor");
         }
         listaBusClass = new ListaBusClass(fecha);
         for(int i = 0; i < rows; i++){
@@ -51,8 +52,7 @@ public class PasajesHorariosClass {
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 1);
         } else {
-            System.err.println("No se selecciono fila");
-            return null;
+            throw new IllegalArgumentException("No se selecciono fila");
         }
     }
 
@@ -65,8 +65,7 @@ public class PasajesHorariosClass {
         if (selectedRow != -1) { // Se verifica si se ha seleccionado una fila
             return (String) ListaBuses.getValueAt(selectedRow, 5);
         } else {
-            System.err.println("No se selecciono fila");
-            return null;
+            throw new IllegalArgumentException("No se selecciono fila");
         }
     }
     /**

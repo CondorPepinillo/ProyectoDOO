@@ -3,6 +3,7 @@ package com.builder;
 import com.grafico.ComunasEnum;
 
 import javax.swing.*;
+import java.io.*;
 import java.util.Date;
 
 public interface Builder {
@@ -28,6 +29,6 @@ public interface Builder {
 
     public Builder table(JTable table);
 
-    public Object build();
+    public Object build() throws IOException, FileNotFoundException;
 }
 

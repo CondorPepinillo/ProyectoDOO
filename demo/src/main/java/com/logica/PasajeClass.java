@@ -30,7 +30,12 @@ public class PasajeClass {
     private int asiento;
     private String tipoAsiento;
 
-    public PasajeClass(PasajeBuilder builder) {
+    public PasajeClass(PasajeBuilder builder) throws IOException {
+
+        if (builder.origen == null || builder.destino == null || builder.fecha == null || builder.horaSalida == null || builder.precio == null || builder.numeroAsiento == null || builder.tipoAsiento == null) {
+            throw new IllegalArgumentException("Faltan datos");
+        }
+
         this.origen = builder.origen;
         this.destino = builder.destino;
         this.fecha = builder.fecha;
@@ -71,7 +76,7 @@ public class PasajeClass {
         return destino;
     }
 
-    public void descargarPasajePDF() {
+    public void descargarPasajePDF() throws IOException {
         String baseFileName = "Pasaje";
         String fileExtension = ".pdf";
         String directoryPath = "../ProyectoDOO/";
@@ -86,85 +91,80 @@ public class PasajeClass {
             file = new File(directoryPath + fileName);
         }
 
-        try (PdfWriter pdfWriter = new PdfWriter(file)) {
-            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-            Document document = new Document(pdfDocument, PageSize.A4);
+        PdfWriter pdfWriter = new PdfWriter(file);
+        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        Document document = new Document(pdfDocument, PageSize.A4);
 
-            // Añadir barra azul superior con texto alineado a la izquierda
-            Table headerTable = new Table(UnitValue.createPercentArray(new float[]{1, 4}));
-            headerTable.setWidth(UnitValue.createPercentValue(100));
-            headerTable.setBackgroundColor(ColorConstants.BLUE);
-            headerTable.setHeight(25);
+        // Añadir barra azul superior con texto alineado a la izquierda
+        Table headerTable = new Table(UnitValue.createPercentArray(new float[]{1, 4}));
+        headerTable.setWidth(UnitValue.createPercentValue(100));
+        headerTable.setBackgroundColor(ColorConstants.BLUE);
+        headerTable.setHeight(25);
 
-            Cell textCell = new Cell().add(new Paragraph("PASAJE BUS BIO-BIO")
-                            .setBold()
-                            .setFontColor(ColorConstants.WHITE)
-                            .setTextAlignment(TextAlignment.LEFT))
-                    .setBorder(null);
+        Cell textCell = new Cell().add(new Paragraph("PASAJE BUS BIO-BIO")
+                        .setBold()
+                        .setFontColor(ColorConstants.WHITE)
+                        .setTextAlignment(TextAlignment.LEFT))
+                        .setBorder(null);
 
-            headerTable.addCell(textCell);
-            headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(null));
+        headerTable.addCell(textCell);
+        headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(null));
 
-            document.add(headerTable);
+        document.add(headerTable);
 
-            // Crear tabla principal para disposición
-            float[] mainTableWidths = {1, 2, 1}; // Tres columnas: etiquetas, información, código de barras
-            Table mainTable = new Table(UnitValue.createPercentArray(mainTableWidths));
-            mainTable.setWidth(UnitValue.createPercentValue(100));
+        // Crear tabla principal para disposición
+        float[] mainTableWidths = {1, 2, 1}; // Tres columnas: etiquetas, información, código de barras
+        Table mainTable = new Table(UnitValue.createPercentArray(mainTableWidths));
+        mainTable.setWidth(UnitValue.createPercentValue(100));
 
-            // Columna 1: etiquetas
-            Table labelsTable = new Table(UnitValue.createPercentArray(new float[]{1}));
-            labelsTable.addCell(new Cell().add(new Paragraph("Origen:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Destino:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Fecha:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Hora de Salida:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Tipo de Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
-            labelsTable.addCell(new Cell().add(new Paragraph("Precio:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        // Columna 1: etiquetas
+        Table labelsTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+        labelsTable.addCell(new Cell().add(new Paragraph("Origen:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Destino:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Fecha:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Hora de Salida:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Tipo de Asiento:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
+        labelsTable.addCell(new Cell().add(new Paragraph("Precio:").setBold()).setBorder(null).setBackgroundColor(ColorConstants.WHITE));
 
-            mainTable.addCell(new Cell().add(labelsTable).setBorder(null));
+        mainTable.addCell(new Cell().add(labelsTable).setBorder(null));
 
-            // Columna 2: información del pasaje
-            Table infoTable = new Table(UnitValue.createPercentArray(new float[]{1}));
-            infoTable.addCell(new Cell().add(new Paragraph(origen.toString())));
-            infoTable.addCell(new Cell().add(new Paragraph(destino.toString())));
-            infoTable.addCell(new Cell().add(new Paragraph(fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + (fecha.getYear() + 1900))));
-            infoTable.addCell(new Cell().add(new Paragraph(horaSalida)));
-            infoTable.addCell(new Cell().add(new Paragraph(String.valueOf(asiento))));
-            infoTable.addCell(new Cell().add(new Paragraph(tipoAsiento)));
-            infoTable.addCell(new Cell().add(new Paragraph(precio)));
+        // Columna 2: información del pasaje
+        Table infoTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+        infoTable.addCell(new Cell().add(new Paragraph(origen.toString())));
+        infoTable.addCell(new Cell().add(new Paragraph(destino.toString())));
+        infoTable.addCell(new Cell().add(new Paragraph(fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + (fecha.getYear() + 1900))));
+        infoTable.addCell(new Cell().add(new Paragraph(horaSalida)));
+        infoTable.addCell(new Cell().add(new Paragraph(String.valueOf(asiento))));
+        infoTable.addCell(new Cell().add(new Paragraph(tipoAsiento)));
+        infoTable.addCell(new Cell().add(new Paragraph(precio)));
 
-            mainTable.addCell(new Cell().add(infoTable).setBorder(null));
+        mainTable.addCell(new Cell().add(infoTable).setBorder(null));
 
-            // Columna 3: código de barras (rotado)
-            Table barcodeTable = new Table(UnitValue.createPercentArray(new float[]{1}));
-            Barcode128 barcode = new Barcode128(pdfDocument);
-            barcode.setCode(getCode());
-            Image barcodeImage = new Image(barcode.createFormXObject(pdfDocument));
-            barcodeImage.setWidth(150);
-            barcodeImage.setHeight(75);
+        // Columna 3: código de barras (rotado)
+        Table barcodeTable = new Table(UnitValue.createPercentArray(new float[]{1}));
+        Barcode128 barcode = new Barcode128(pdfDocument);
+        barcode.setCode(getCode());
+        Image barcodeImage = new Image(barcode.createFormXObject(pdfDocument));
+        barcodeImage.setWidth(150);
+        barcodeImage.setHeight(75);
 
-            barcodeTable.addCell(new Cell().add(barcodeImage).setBorder(null));
+        barcodeTable.addCell(new Cell().add(barcodeImage).setBorder(null));
 
-            mainTable.addCell(new Cell().add(barcodeTable).setBorder(null));
+        mainTable.addCell(new Cell().add(barcodeTable).setBorder(null));
 
-            document.add(mainTable);
+        document.add(mainTable);
 
-            // Añadir línea azul en la parte inferior
-            document.add(new Paragraph("")
-                    .setBackgroundColor(ColorConstants.BLUE)
-                    .setHeight(25)
-                    .setMarginTop(1));
+        // Añadir línea azul en la parte inferior
+        document.add(new Paragraph("")
+                .setBackgroundColor(ColorConstants.BLUE)
+                .setHeight(25)
+                .setMarginTop(1));
 
-            document.close();
-            pdfDocument.close();
+        document.close();
+        pdfDocument.close();
 
-            System.out.println("Pasaje descargado en PDF");
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println("Pasaje descargado en PDF");
     }
 
 

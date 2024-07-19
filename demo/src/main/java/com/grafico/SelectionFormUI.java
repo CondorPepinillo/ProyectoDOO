@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 /**
  * Clase SelectionForm1, clase que se encarga de iniciar la ventana principal y de la seleccion de elementos del viaje siendo estos la comuna de origen, comuna de destino y fecha del viaje
@@ -51,7 +52,11 @@ public class SelectionFormUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                new SelectionFormClass(dateChooser, origenComboBox1, destinoComboBox1, frame);
+                try {
+                    new SelectionFormClass(dateChooser, origenComboBox1, destinoComboBox1, frame);
+                } catch (IllegalArgumentException | NullPointerException ex) {
+                    JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 

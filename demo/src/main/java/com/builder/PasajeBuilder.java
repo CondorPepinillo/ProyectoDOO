@@ -4,6 +4,8 @@ import com.grafico.ComunasEnum;
 import com.logica.PasajeClass;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 public class PasajeBuilder implements Builder{
@@ -80,7 +82,7 @@ public class PasajeBuilder implements Builder{
     }
 
     @Override
-    public Object build() {
+    public Object build() throws IOException {
         this.pasajeClass = new PasajeClass(this);
         return pasajeClass;
     }
