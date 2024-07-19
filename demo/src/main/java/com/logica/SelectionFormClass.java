@@ -15,11 +15,11 @@ public class SelectionFormClass {
         Date fechaAux2 = fechaAux.getTime();
 
         if (dateChooser.getDate() == null) {
-            throw new NullPointerException("Selecciona una fecha");
+            throw new NullPointerException("Ingrese datos válidos");
         } else if (dateChooser.getDate().compareTo(fechaAux2) < 0) {
-            throw new IllegalArgumentException("No puedes poner una fecha anterior");
+            throw new IllegalArgumentException("Ingrese datos válidos");
         } else if (origenComboBox1.getSelectedItem() == destinoComboBox1.getSelectedItem()) {
-            throw new IllegalArgumentException("No puedes poner el mismo origen y destino");
+            throw new IllegalArgumentException("Ingrese datos válidos");
         } else if (origenComboBox1.getSelectedItem() != destinoComboBox1.getSelectedItem() && origenComboBox1 != null && destinoComboBox1 != null && dateChooser.getDate().compareTo(fechaAux2) >= 0) {
             origen = (ComunasEnum) origenComboBox1.getSelectedItem();
             destino = (ComunasEnum) destinoComboBox1.getSelectedItem();
