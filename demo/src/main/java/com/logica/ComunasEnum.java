@@ -1,4 +1,4 @@
-package com.grafico;
+package com.logica;
 
 /**
  * Clase con las comunas que pueden ser origen o destino

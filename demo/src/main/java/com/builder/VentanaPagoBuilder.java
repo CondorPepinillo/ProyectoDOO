@@ -1,6 +1,6 @@
 package com.builder;
 
-import com.grafico.ComunasEnum;
+import com.logica.ComunasEnum;
 import com.grafico.VentanaPagoUI;
 
 import javax.swing.*;

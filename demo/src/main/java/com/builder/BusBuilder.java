@@ -1,7 +1,7 @@
 package com.builder;
 
 import com.grafico.BusUI;
-import com.grafico.ComunasEnum;
+import com.logica.ComunasEnum;
 
 import javax.swing.*;
 import java.util.Date;

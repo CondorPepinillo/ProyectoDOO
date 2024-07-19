@@ -3,7 +3,6 @@ package com.logica;
 import com.builder.BusBuilder;
 import com.builder.PasajesHorariosBuilder;
 import com.grafico.BusUI;
-import com.grafico.ComunasEnum;
 
 import javax.swing.*;
 import java.io.IOException;

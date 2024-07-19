@@ -1,6 +1,7 @@
 package com.grafico;
 
 import com.builder.PasajesHorariosBuilder;
+import com.logica.ComunasEnum;
 import com.logica.DataClass;
 import com.logica.PasajesHorariosClass;
 

@@ -1,10 +1,9 @@
 package com.builder;
 
-import com.grafico.ComunasEnum;
+import com.logica.ComunasEnum;
 import com.logica.PasajeClass;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 

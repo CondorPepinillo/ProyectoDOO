@@ -1,7 +1,6 @@
 package com.logica;
 
 import com.builder.PasajeBuilder;
-import com.grafico.ComunasEnum;
 import com.itextpdf.barcodes.Barcode128;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.geom.PageSize;

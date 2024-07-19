@@ -3,10 +3,10 @@ package com.grafico;
 import com.builder.BusBuilder;
 import com.builder.VentanaPagoBuilder;
 import com.logica.BusClass;
+import com.logica.ComunasEnum;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;

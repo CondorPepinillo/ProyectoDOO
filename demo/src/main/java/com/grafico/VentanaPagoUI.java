@@ -1,13 +1,13 @@
 package com.grafico;
 import com.builder.PasajeBuilder;
 import com.builder.VentanaPagoBuilder;
+import com.logica.ComunasEnum;
 import com.logica.PasajeClass;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 
