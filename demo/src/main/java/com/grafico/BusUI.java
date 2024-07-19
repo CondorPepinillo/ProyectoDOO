@@ -112,7 +112,7 @@ public class BusUI {
         }
 
         frame.getContentPane().add(panel1);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         if (seats <= 20) {
             frame.setPreferredSize(new Dimension(250, 200));
         } else {
